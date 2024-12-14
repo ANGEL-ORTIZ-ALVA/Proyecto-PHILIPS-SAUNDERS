@@ -1,0 +1,1286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ColegioBDv2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Apoderado">
+          <Key>
+            <PropertyRef Name="ID_Apoderado" />
+          </Key>
+          <Property Name="ID_Apoderado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Apellido" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DNI" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="Correo" Type="varchar" MaxLength="100" />
+          <Property Name="Telefono" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Direccion" Type="varchar" MaxLength="125" Nullable="false" />
+          <Property Name="Estado_Registro" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="ID_Genero" Type="int" />
+          <Property Name="ID_Usuario" Type="int" />
+        </EntityType>
+        <EntityType Name="Apoderado_Estudiante">
+          <Key>
+            <PropertyRef Name="ID_Apoderado" />
+            <PropertyRef Name="ID_Estudiante" />
+          </Key>
+          <Property Name="ID_Apoderado" Type="int" Nullable="false" />
+          <Property Name="ID_Estudiante" Type="int" Nullable="false" />
+          <Property Name="Parentesco" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Estado_Registro" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Asistencia">
+          <Key>
+            <PropertyRef Name="ID_Asistencia" />
+          </Key>
+          <Property Name="ID_Asistencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Tipo_Asistencia" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="ID_Estudiante" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Descripcion" Type="text" />
+          <Property Name="Estado_Registro" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Curso">
+          <Key>
+            <PropertyRef Name="ID_Curso" />
+          </Key>
+          <Property Name="ID_Curso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Curso" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="text" />
+          <Property Name="Estado_Registro" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="ID_Personal" Type="int" />
+        </EntityType>
+        <EntityType Name="Detalle_Curso">
+          <Key>
+            <PropertyRef Name="ID_Estudiante" />
+            <PropertyRef Name="ID_Curso" />
+            <PropertyRef Name="ID_Periodo" />
+          </Key>
+          <Property Name="ID_Estudiante" Type="int" Nullable="false" />
+          <Property Name="ID_Curso" Type="int" Nullable="false" />
+          <Property Name="ID_Periodo" Type="int" Nullable="false" />
+          <Property Name="Competencia1" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Competencia2" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Competencia3" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Competencia4" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Proyecto" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="ExamenFinal" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Estado_Registro" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Estado_Usuario">
+          <Key>
+            <PropertyRef Name="ID_Estado_Usuario" />
+          </Key>
+          <Property Name="ID_Estado_Usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Estado_Usuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Estado_Registro" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Estudiante">
+          <Key>
+            <PropertyRef Name="ID_Estudiante" />
+          </Key>
+          <Property Name="ID_Estudiante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Apellido" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fecha_Nacimiento" Type="date" Nullable="false" />
+          <Property Name="DNI" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="Direccion" Type="varchar" MaxLength="125" Nullable="false" />
+          <Property Name="Estado_Registro" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="ID_Genero" Type="int" />
+          <Property Name="ID_Grado" Type="int" />
+          <Property Name="ID_Seccion" Type="int" />
+          <Property Name="ID_Usuario" Type="int" />
+        </EntityType>
+        <EntityType Name="Genero">
+          <Key>
+            <PropertyRef Name="ID_Genero" />
+          </Key>
+          <Property Name="ID_Genero" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Genero" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="Estado_Registro" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Grado">
+          <Key>
+            <PropertyRef Name="ID_Grado" />
+          </Key>
+          <Property Name="ID_Grado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Numero_Grado" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="Estado_Registro" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Periodo">
+          <Key>
+            <PropertyRef Name="ID_Periodo" />
+          </Key>
+          <Property Name="ID_Periodo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Periodo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="text" />
+          <Property Name="Estado_Registro" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Personal">
+          <Key>
+            <PropertyRef Name="ID_Personal" />
+          </Key>
+          <Property Name="ID_Personal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Apellido" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fecha_Nacimiento" Type="date" Nullable="false" />
+          <Property Name="DNI" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="Correo" Type="varchar" MaxLength="100" />
+          <Property Name="Telefono" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Direccion" Type="varchar" MaxLength="125" Nullable="false" />
+          <Property Name="Firma" Type="varbinary(max)" />
+          <Property Name="Sello" Type="varbinary(max)" />
+          <Property Name="Estado_Registro" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="ID_Tipo_Personal" Type="int" />
+          <Property Name="ID_Genero" Type="int" />
+          <Property Name="ID_Grado" Type="int" />
+          <Property Name="ID_Seccion" Type="int" />
+          <Property Name="ID_Usuario" Type="int" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="ID_Rol" />
+          </Key>
+          <Property Name="ID_Rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Rol" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Permiso" Type="text" />
+          <Property Name="Estado_Registro" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Seccion">
+          <Key>
+            <PropertyRef Name="ID_Seccion" />
+          </Key>
+          <Property Name="ID_Seccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Seccion" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Aforo" Type="int" Nullable="false" />
+          <Property Name="Estado_Registro" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tipo_Personal">
+          <Key>
+            <PropertyRef Name="ID_Tipo_Personal" />
+          </Key>
+          <Property Name="ID_Tipo_Personal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Tipo_Personal" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Descripcion" Type="text" />
+          <Property Name="Estado_Registro" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="ID_Usuario" />
+          </Key>
+          <Property Name="ID_Usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Usuario" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Fecha_Creacion" Type="datetime" Nullable="false" />
+          <Property Name="Ultimo_Acceso" Type="datetime" />
+          <Property Name="Estado_Registro" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="ID_Estado_Usuario" Type="int" />
+          <Property Name="ID_Rol" Type="int" />
+        </EntityType>
+        <Association Name="FK__Apoderado__ID_Ap__18EBB532">
+          <End Role="Apoderado" Type="Self.Apoderado" Multiplicity="1" />
+          <End Role="Apoderado_Estudiante" Type="Self.Apoderado_Estudiante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Apoderado">
+              <PropertyRef Name="ID_Apoderado" />
+            </Principal>
+            <Dependent Role="Apoderado_Estudiante">
+              <PropertyRef Name="ID_Apoderado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Apoderado__ID_Es__19DFD96B">
+          <End Role="Estudiante" Type="Self.Estudiante" Multiplicity="1" />
+          <End Role="Apoderado_Estudiante" Type="Self.Apoderado_Estudiante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estudiante">
+              <PropertyRef Name="ID_Estudiante" />
+            </Principal>
+            <Dependent Role="Apoderado_Estudiante">
+              <PropertyRef Name="ID_Estudiante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Apoderado__ID_Ge__72C60C4A">
+          <End Role="Genero" Type="Self.Genero" Multiplicity="0..1" />
+          <End Role="Apoderado" Type="Self.Apoderado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genero">
+              <PropertyRef Name="ID_Genero" />
+            </Principal>
+            <Dependent Role="Apoderado">
+              <PropertyRef Name="ID_Genero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Apoderado__ID_Us__73BA3083">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Apoderado" Type="Self.Apoderado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="ID_Usuario" />
+            </Principal>
+            <Dependent Role="Apoderado">
+              <PropertyRef Name="ID_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asistenci__ID_Es__7E37BEF6">
+          <End Role="Estudiante" Type="Self.Estudiante" Multiplicity="1" />
+          <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estudiante">
+              <PropertyRef Name="ID_Estudiante" />
+            </Principal>
+            <Dependent Role="Asistencia">
+              <PropertyRef Name="ID_Estudiante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Curso__ID_Person__787EE5A0">
+          <End Role="Personal" Type="Self.Personal" Multiplicity="0..1" />
+          <End Role="Curso" Type="Self.Curso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal">
+              <PropertyRef Name="ID_Personal" />
+            </Principal>
+            <Dependent Role="Curso">
+              <PropertyRef Name="ID_Personal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle_C__ID_Cu__1332DBDC">
+          <End Role="Curso" Type="Self.Curso" Multiplicity="1" />
+          <End Role="Detalle_Curso" Type="Self.Detalle_Curso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curso">
+              <PropertyRef Name="ID_Curso" />
+            </Principal>
+            <Dependent Role="Detalle_Curso">
+              <PropertyRef Name="ID_Curso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle_C__ID_Es__123EB7A3">
+          <End Role="Estudiante" Type="Self.Estudiante" Multiplicity="1" />
+          <End Role="Detalle_Curso" Type="Self.Detalle_Curso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estudiante">
+              <PropertyRef Name="ID_Estudiante" />
+            </Principal>
+            <Dependent Role="Detalle_Curso">
+              <PropertyRef Name="ID_Estudiante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle_C__ID_Pe__14270015">
+          <End Role="Periodo" Type="Self.Periodo" Multiplicity="1" />
+          <End Role="Detalle_Curso" Type="Self.Detalle_Curso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Periodo">
+              <PropertyRef Name="ID_Periodo" />
+            </Principal>
+            <Dependent Role="Detalle_Curso">
+              <PropertyRef Name="ID_Periodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Estudiant__ID_Ge__68487DD7">
+          <End Role="Genero" Type="Self.Genero" Multiplicity="0..1" />
+          <End Role="Estudiante" Type="Self.Estudiante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genero">
+              <PropertyRef Name="ID_Genero" />
+            </Principal>
+            <Dependent Role="Estudiante">
+              <PropertyRef Name="ID_Genero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Estudiant__ID_Gr__693CA210">
+          <End Role="Grado" Type="Self.Grado" Multiplicity="0..1" />
+          <End Role="Estudiante" Type="Self.Estudiante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grado">
+              <PropertyRef Name="ID_Grado" />
+            </Principal>
+            <Dependent Role="Estudiante">
+              <PropertyRef Name="ID_Grado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Estudiant__ID_Se__6A30C649">
+          <End Role="Seccion" Type="Self.Seccion" Multiplicity="0..1" />
+          <End Role="Estudiante" Type="Self.Estudiante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seccion">
+              <PropertyRef Name="ID_Seccion" />
+            </Principal>
+            <Dependent Role="Estudiante">
+              <PropertyRef Name="ID_Seccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Estudiant__ID_Us__6B24EA82">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Estudiante" Type="Self.Estudiante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="ID_Usuario" />
+            </Principal>
+            <Dependent Role="Estudiante">
+              <PropertyRef Name="ID_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Personal__ID_Gen__5DCAEF64">
+          <End Role="Genero" Type="Self.Genero" Multiplicity="0..1" />
+          <End Role="Personal" Type="Self.Personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genero">
+              <PropertyRef Name="ID_Genero" />
+            </Principal>
+            <Dependent Role="Personal">
+              <PropertyRef Name="ID_Genero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Personal__ID_Gra__5EBF139D">
+          <End Role="Grado" Type="Self.Grado" Multiplicity="0..1" />
+          <End Role="Personal" Type="Self.Personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grado">
+              <PropertyRef Name="ID_Grado" />
+            </Principal>
+            <Dependent Role="Personal">
+              <PropertyRef Name="ID_Grado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Personal__ID_Sec__5FB337D6">
+          <End Role="Seccion" Type="Self.Seccion" Multiplicity="0..1" />
+          <End Role="Personal" Type="Self.Personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seccion">
+              <PropertyRef Name="ID_Seccion" />
+            </Principal>
+            <Dependent Role="Personal">
+              <PropertyRef Name="ID_Seccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Personal__ID_Tip__5CD6CB2B">
+          <End Role="Tipo_Personal" Type="Self.Tipo_Personal" Multiplicity="0..1" />
+          <End Role="Personal" Type="Self.Personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Personal">
+              <PropertyRef Name="ID_Tipo_Personal" />
+            </Principal>
+            <Dependent Role="Personal">
+              <PropertyRef Name="ID_Tipo_Personal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Personal__ID_Usu__60A75C0F">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Personal" Type="Self.Personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="ID_Usuario" />
+            </Principal>
+            <Dependent Role="Personal">
+              <PropertyRef Name="ID_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuario__ID_Esta__4222D4EF">
+          <End Role="Estado_Usuario" Type="Self.Estado_Usuario" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado_Usuario">
+              <PropertyRef Name="ID_Estado_Usuario" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="ID_Estado_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuario__ID_Rol__4316F928">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="ID_Rol" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="ID_Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ColegioBDv2ModelStoreContainer">
+          <EntitySet Name="Apoderado" EntityType="Self.Apoderado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Apoderado_Estudiante" EntityType="Self.Apoderado_Estudiante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Asistencia" EntityType="Self.Asistencia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Curso" EntityType="Self.Curso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Detalle_Curso" EntityType="Self.Detalle_Curso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estado_Usuario" EntityType="Self.Estado_Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estudiante" EntityType="Self.Estudiante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genero" EntityType="Self.Genero" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grado" EntityType="Self.Grado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Periodo" EntityType="Self.Periodo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Personal" EntityType="Self.Personal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Seccion" EntityType="Self.Seccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tipo_Personal" EntityType="Self.Tipo_Personal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Apoderado__ID_Ap__18EBB532" Association="Self.FK__Apoderado__ID_Ap__18EBB532">
+            <End Role="Apoderado" EntitySet="Apoderado" />
+            <End Role="Apoderado_Estudiante" EntitySet="Apoderado_Estudiante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Apoderado__ID_Es__19DFD96B" Association="Self.FK__Apoderado__ID_Es__19DFD96B">
+            <End Role="Estudiante" EntitySet="Estudiante" />
+            <End Role="Apoderado_Estudiante" EntitySet="Apoderado_Estudiante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Apoderado__ID_Ge__72C60C4A" Association="Self.FK__Apoderado__ID_Ge__72C60C4A">
+            <End Role="Genero" EntitySet="Genero" />
+            <End Role="Apoderado" EntitySet="Apoderado" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Apoderado__ID_Us__73BA3083" Association="Self.FK__Apoderado__ID_Us__73BA3083">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Apoderado" EntitySet="Apoderado" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asistenci__ID_Es__7E37BEF6" Association="Self.FK__Asistenci__ID_Es__7E37BEF6">
+            <End Role="Estudiante" EntitySet="Estudiante" />
+            <End Role="Asistencia" EntitySet="Asistencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Curso__ID_Person__787EE5A0" Association="Self.FK__Curso__ID_Person__787EE5A0">
+            <End Role="Personal" EntitySet="Personal" />
+            <End Role="Curso" EntitySet="Curso" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle_C__ID_Cu__1332DBDC" Association="Self.FK__Detalle_C__ID_Cu__1332DBDC">
+            <End Role="Curso" EntitySet="Curso" />
+            <End Role="Detalle_Curso" EntitySet="Detalle_Curso" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle_C__ID_Es__123EB7A3" Association="Self.FK__Detalle_C__ID_Es__123EB7A3">
+            <End Role="Estudiante" EntitySet="Estudiante" />
+            <End Role="Detalle_Curso" EntitySet="Detalle_Curso" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle_C__ID_Pe__14270015" Association="Self.FK__Detalle_C__ID_Pe__14270015">
+            <End Role="Periodo" EntitySet="Periodo" />
+            <End Role="Detalle_Curso" EntitySet="Detalle_Curso" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Estudiant__ID_Ge__68487DD7" Association="Self.FK__Estudiant__ID_Ge__68487DD7">
+            <End Role="Genero" EntitySet="Genero" />
+            <End Role="Estudiante" EntitySet="Estudiante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Estudiant__ID_Gr__693CA210" Association="Self.FK__Estudiant__ID_Gr__693CA210">
+            <End Role="Grado" EntitySet="Grado" />
+            <End Role="Estudiante" EntitySet="Estudiante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Estudiant__ID_Se__6A30C649" Association="Self.FK__Estudiant__ID_Se__6A30C649">
+            <End Role="Seccion" EntitySet="Seccion" />
+            <End Role="Estudiante" EntitySet="Estudiante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Estudiant__ID_Us__6B24EA82" Association="Self.FK__Estudiant__ID_Us__6B24EA82">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Estudiante" EntitySet="Estudiante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Personal__ID_Gen__5DCAEF64" Association="Self.FK__Personal__ID_Gen__5DCAEF64">
+            <End Role="Genero" EntitySet="Genero" />
+            <End Role="Personal" EntitySet="Personal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Personal__ID_Gra__5EBF139D" Association="Self.FK__Personal__ID_Gra__5EBF139D">
+            <End Role="Grado" EntitySet="Grado" />
+            <End Role="Personal" EntitySet="Personal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Personal__ID_Sec__5FB337D6" Association="Self.FK__Personal__ID_Sec__5FB337D6">
+            <End Role="Seccion" EntitySet="Seccion" />
+            <End Role="Personal" EntitySet="Personal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Personal__ID_Tip__5CD6CB2B" Association="Self.FK__Personal__ID_Tip__5CD6CB2B">
+            <End Role="Tipo_Personal" EntitySet="Tipo_Personal" />
+            <End Role="Personal" EntitySet="Personal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Personal__ID_Usu__60A75C0F" Association="Self.FK__Personal__ID_Usu__60A75C0F">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Personal" EntitySet="Personal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario__ID_Esta__4222D4EF" Association="Self.FK__Usuario__ID_Esta__4222D4EF">
+            <End Role="Estado_Usuario" EntitySet="Estado_Usuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario__ID_Rol__4316F928" Association="Self.FK__Usuario__ID_Rol__4316F928">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ColegioBDv2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Apoderado">
+          <Key>
+            <PropertyRef Name="ID_Apoderado" />
+          </Key>
+          <Property Name="ID_Apoderado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DNI" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Direccion" Type="String" MaxLength="125" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado_Registro" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_Genero" Type="Int32" />
+          <Property Name="ID_Usuario" Type="Int32" />
+          <NavigationProperty Name="Apoderado_Estudiante" Relationship="Self.FK__Apoderado__ID_Ap__2B0A656D" FromRole="Apoderado" ToRole="Apoderado_Estudiante" />
+          <NavigationProperty Name="Genero" Relationship="Self.FK__Apoderado__ID_Ge__04E4BC85" FromRole="Apoderado" ToRole="Genero" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Apoderado__ID_Us__05D8E0BE" FromRole="Apoderado" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Apoderado_Estudiante">
+          <Key>
+            <PropertyRef Name="ID_Apoderado" />
+            <PropertyRef Name="ID_Estudiante" />
+          </Key>
+          <Property Name="ID_Apoderado" Type="Int32" Nullable="false" />
+          <Property Name="ID_Estudiante" Type="Int32" Nullable="false" />
+          <Property Name="Parentesco" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado_Registro" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Apoderado" Relationship="Self.FK__Apoderado__ID_Ap__2B0A656D" FromRole="Apoderado_Estudiante" ToRole="Apoderado" />
+          <NavigationProperty Name="Estudiante" Relationship="Self.FK__Apoderado__ID_Es__2BFE89A6" FromRole="Apoderado_Estudiante" ToRole="Estudiante" />
+        </EntityType>
+        <EntityType Name="Asistencia">
+          <Key>
+            <PropertyRef Name="ID_Asistencia" />
+          </Key>
+          <Property Name="ID_Asistencia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Tipo_Asistencia" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_Estudiante" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Estado_Registro" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Estudiante" Relationship="Self.FK__Asistenci__ID_Es__10566F31" FromRole="Asistencia" ToRole="Estudiante" />
+        </EntityType>
+        <EntityType Name="Curso">
+          <Key>
+            <PropertyRef Name="ID_Curso" />
+          </Key>
+          <Property Name="ID_Curso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Curso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Estado_Registro" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_Personal" Type="Int32" />
+          <NavigationProperty Name="Personal" Relationship="Self.FK__Curso__ID_Person__0A9D95DB" FromRole="Curso" ToRole="Personal" />
+          <NavigationProperty Name="Detalle_Curso" Relationship="Self.FK__Detalle_C__ID_Cu__25518C17" FromRole="Curso" ToRole="Detalle_Curso" />
+        </EntityType>
+        <EntityType Name="Detalle_Curso">
+          <Key>
+            <PropertyRef Name="ID_Estudiante" />
+            <PropertyRef Name="ID_Curso" />
+            <PropertyRef Name="ID_Periodo" />
+          </Key>
+          <Property Name="ID_Estudiante" Type="Int32" Nullable="false" />
+          <Property Name="ID_Curso" Type="Int32" Nullable="false" />
+          <Property Name="ID_Periodo" Type="Int32" Nullable="false" />
+          <Property Name="Competencia1" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Competencia2" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Competencia3" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Competencia4" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Proyecto" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="ExamenFinal" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Estado_Registro" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Curso" Relationship="Self.FK__Detalle_C__ID_Cu__25518C17" FromRole="Detalle_Curso" ToRole="Curso" />
+          <NavigationProperty Name="Estudiante" Relationship="Self.FK__Detalle_C__ID_Es__245D67DE" FromRole="Detalle_Curso" ToRole="Estudiante" />
+          <NavigationProperty Name="Periodo" Relationship="Self.FK__Detalle_C__ID_Pe__2645B050" FromRole="Detalle_Curso" ToRole="Periodo" />
+        </EntityType>
+        <EntityType Name="Estado_Usuario">
+          <Key>
+            <PropertyRef Name="ID_Estado_Usuario" />
+          </Key>
+          <Property Name="ID_Estado_Usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Estado_Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado_Registro" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Usuario__ID_Esta__5441852A" FromRole="Estado_Usuario" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Estudiante">
+          <Key>
+            <PropertyRef Name="ID_Estudiante" />
+          </Key>
+          <Property Name="ID_Estudiante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fecha_Nacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DNI" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Direccion" Type="String" MaxLength="125" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado_Registro" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_Genero" Type="Int32" />
+          <Property Name="ID_Grado" Type="Int32" />
+          <Property Name="ID_Seccion" Type="Int32" />
+          <Property Name="ID_Usuario" Type="Int32" />
+          <NavigationProperty Name="Apoderado_Estudiante" Relationship="Self.FK__Apoderado__ID_Es__2BFE89A6" FromRole="Estudiante" ToRole="Apoderado_Estudiante" />
+          <NavigationProperty Name="Asistencia" Relationship="Self.FK__Asistenci__ID_Es__10566F31" FromRole="Estudiante" ToRole="Asistencia" />
+          <NavigationProperty Name="Detalle_Curso" Relationship="Self.FK__Detalle_C__ID_Es__245D67DE" FromRole="Estudiante" ToRole="Detalle_Curso" />
+          <NavigationProperty Name="Genero" Relationship="Self.FK__Estudiant__ID_Ge__7A672E12" FromRole="Estudiante" ToRole="Genero" />
+          <NavigationProperty Name="Grado" Relationship="Self.FK__Estudiant__ID_Gr__7B5B524B" FromRole="Estudiante" ToRole="Grado" />
+          <NavigationProperty Name="Seccion" Relationship="Self.FK__Estudiant__ID_Se__7C4F7684" FromRole="Estudiante" ToRole="Seccion" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Estudiant__ID_Us__7D439ABD" FromRole="Estudiante" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Genero">
+          <Key>
+            <PropertyRef Name="ID_Genero" />
+          </Key>
+          <Property Name="ID_Genero" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Genero" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado_Registro" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Apoderado" Relationship="Self.FK__Apoderado__ID_Ge__04E4BC85" FromRole="Genero" ToRole="Apoderado" />
+          <NavigationProperty Name="Estudiante" Relationship="Self.FK__Estudiant__ID_Ge__7A672E12" FromRole="Genero" ToRole="Estudiante" />
+          <NavigationProperty Name="Personal" Relationship="Self.FK__Personal__ID_Gen__6FE99F9F" FromRole="Genero" ToRole="Personal" />
+        </EntityType>
+        <EntityType Name="Grado">
+          <Key>
+            <PropertyRef Name="ID_Grado" />
+          </Key>
+          <Property Name="ID_Grado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Numero_Grado" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado_Registro" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Estudiante" Relationship="Self.FK__Estudiant__ID_Gr__7B5B524B" FromRole="Grado" ToRole="Estudiante" />
+          <NavigationProperty Name="Personal" Relationship="Self.FK__Personal__ID_Gra__70DDC3D8" FromRole="Grado" ToRole="Personal" />
+        </EntityType>
+        <EntityType Name="Periodo">
+          <Key>
+            <PropertyRef Name="ID_Periodo" />
+          </Key>
+          <Property Name="ID_Periodo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Periodo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Estado_Registro" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Detalle_Curso" Relationship="Self.FK__Detalle_C__ID_Pe__2645B050" FromRole="Periodo" ToRole="Detalle_Curso" />
+        </EntityType>
+        <EntityType Name="Personal">
+          <Key>
+            <PropertyRef Name="ID_Personal" />
+          </Key>
+          <Property Name="ID_Personal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fecha_Nacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DNI" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Direccion" Type="String" MaxLength="125" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Firma" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Sello" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Estado_Registro" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_Tipo_Personal" Type="Int32" />
+          <Property Name="ID_Genero" Type="Int32" />
+          <Property Name="ID_Grado" Type="Int32" />
+          <Property Name="ID_Seccion" Type="Int32" />
+          <Property Name="ID_Usuario" Type="Int32" />
+          <NavigationProperty Name="Curso" Relationship="Self.FK__Curso__ID_Person__0A9D95DB" FromRole="Personal" ToRole="Curso" />
+          <NavigationProperty Name="Genero" Relationship="Self.FK__Personal__ID_Gen__6FE99F9F" FromRole="Personal" ToRole="Genero" />
+          <NavigationProperty Name="Grado" Relationship="Self.FK__Personal__ID_Gra__70DDC3D8" FromRole="Personal" ToRole="Grado" />
+          <NavigationProperty Name="Seccion" Relationship="Self.FK__Personal__ID_Sec__71D1E811" FromRole="Personal" ToRole="Seccion" />
+          <NavigationProperty Name="Tipo_Personal" Relationship="Self.FK__Personal__ID_Tip__6EF57B66" FromRole="Personal" ToRole="Tipo_Personal" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Personal__ID_Usu__72C60C4A" FromRole="Personal" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="ID_Rol" />
+          </Key>
+          <Property Name="ID_Rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Permiso" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Estado_Registro" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Usuario__ID_Rol__5535A963" FromRole="Rol" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Seccion">
+          <Key>
+            <PropertyRef Name="ID_Seccion" />
+          </Key>
+          <Property Name="ID_Seccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Seccion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Aforo" Type="Int32" Nullable="false" />
+          <Property Name="Estado_Registro" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Estudiante" Relationship="Self.FK__Estudiant__ID_Se__7C4F7684" FromRole="Seccion" ToRole="Estudiante" />
+          <NavigationProperty Name="Personal" Relationship="Self.FK__Personal__ID_Sec__71D1E811" FromRole="Seccion" ToRole="Personal" />
+        </EntityType>
+        <EntityType Name="Tipo_Personal">
+          <Key>
+            <PropertyRef Name="ID_Tipo_Personal" />
+          </Key>
+          <Property Name="ID_Tipo_Personal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Tipo_Personal" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Estado_Registro" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Personal" Relationship="Self.FK__Personal__ID_Tip__6EF57B66" FromRole="Tipo_Personal" ToRole="Personal" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="ID_Usuario" />
+          </Key>
+          <Property Name="ID_Usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Usuario" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fecha_Creacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Ultimo_Acceso" Type="DateTime" Precision="3" />
+          <Property Name="Estado_Registro" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_Estado_Usuario" Type="Int32" />
+          <Property Name="ID_Rol" Type="Int32" />
+          <NavigationProperty Name="Apoderado" Relationship="Self.FK__Apoderado__ID_Us__05D8E0BE" FromRole="Usuario" ToRole="Apoderado" />
+          <NavigationProperty Name="Estado_Usuario" Relationship="Self.FK__Usuario__ID_Esta__5441852A" FromRole="Usuario" ToRole="Estado_Usuario" />
+          <NavigationProperty Name="Estudiante" Relationship="Self.FK__Estudiant__ID_Us__7D439ABD" FromRole="Usuario" ToRole="Estudiante" />
+          <NavigationProperty Name="Personal" Relationship="Self.FK__Personal__ID_Usu__72C60C4A" FromRole="Usuario" ToRole="Personal" />
+          <NavigationProperty Name="Rol" Relationship="Self.FK__Usuario__ID_Rol__5535A963" FromRole="Usuario" ToRole="Rol" />
+        </EntityType>
+        <Association Name="FK__Apoderado__ID_Ap__2B0A656D">
+          <End Role="Apoderado" Type="Self.Apoderado" Multiplicity="1" />
+          <End Role="Apoderado_Estudiante" Type="Self.Apoderado_Estudiante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Apoderado">
+              <PropertyRef Name="ID_Apoderado" />
+            </Principal>
+            <Dependent Role="Apoderado_Estudiante">
+              <PropertyRef Name="ID_Apoderado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Apoderado__ID_Ge__04E4BC85">
+          <End Role="Genero" Type="Self.Genero" Multiplicity="0..1" />
+          <End Role="Apoderado" Type="Self.Apoderado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genero">
+              <PropertyRef Name="ID_Genero" />
+            </Principal>
+            <Dependent Role="Apoderado">
+              <PropertyRef Name="ID_Genero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Apoderado__ID_Us__05D8E0BE">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Apoderado" Type="Self.Apoderado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="ID_Usuario" />
+            </Principal>
+            <Dependent Role="Apoderado">
+              <PropertyRef Name="ID_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Apoderado__ID_Es__2BFE89A6">
+          <End Role="Estudiante" Type="Self.Estudiante" Multiplicity="1" />
+          <End Role="Apoderado_Estudiante" Type="Self.Apoderado_Estudiante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estudiante">
+              <PropertyRef Name="ID_Estudiante" />
+            </Principal>
+            <Dependent Role="Apoderado_Estudiante">
+              <PropertyRef Name="ID_Estudiante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asistenci__ID_Es__10566F31">
+          <End Role="Estudiante" Type="Self.Estudiante" Multiplicity="1" />
+          <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estudiante">
+              <PropertyRef Name="ID_Estudiante" />
+            </Principal>
+            <Dependent Role="Asistencia">
+              <PropertyRef Name="ID_Estudiante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Curso__ID_Person__0A9D95DB">
+          <End Role="Personal" Type="Self.Personal" Multiplicity="0..1" />
+          <End Role="Curso" Type="Self.Curso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal">
+              <PropertyRef Name="ID_Personal" />
+            </Principal>
+            <Dependent Role="Curso">
+              <PropertyRef Name="ID_Personal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle_C__ID_Cu__25518C17">
+          <End Role="Curso" Type="Self.Curso" Multiplicity="1" />
+          <End Role="Detalle_Curso" Type="Self.Detalle_Curso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curso">
+              <PropertyRef Name="ID_Curso" />
+            </Principal>
+            <Dependent Role="Detalle_Curso">
+              <PropertyRef Name="ID_Curso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle_C__ID_Es__245D67DE">
+          <End Role="Estudiante" Type="Self.Estudiante" Multiplicity="1" />
+          <End Role="Detalle_Curso" Type="Self.Detalle_Curso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estudiante">
+              <PropertyRef Name="ID_Estudiante" />
+            </Principal>
+            <Dependent Role="Detalle_Curso">
+              <PropertyRef Name="ID_Estudiante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle_C__ID_Pe__2645B050">
+          <End Role="Periodo" Type="Self.Periodo" Multiplicity="1" />
+          <End Role="Detalle_Curso" Type="Self.Detalle_Curso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Periodo">
+              <PropertyRef Name="ID_Periodo" />
+            </Principal>
+            <Dependent Role="Detalle_Curso">
+              <PropertyRef Name="ID_Periodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuario__ID_Esta__5441852A">
+          <End Role="Estado_Usuario" Type="Self.Estado_Usuario" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado_Usuario">
+              <PropertyRef Name="ID_Estado_Usuario" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="ID_Estado_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Estudiant__ID_Ge__7A672E12">
+          <End Role="Genero" Type="Self.Genero" Multiplicity="0..1" />
+          <End Role="Estudiante" Type="Self.Estudiante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genero">
+              <PropertyRef Name="ID_Genero" />
+            </Principal>
+            <Dependent Role="Estudiante">
+              <PropertyRef Name="ID_Genero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Estudiant__ID_Gr__7B5B524B">
+          <End Role="Grado" Type="Self.Grado" Multiplicity="0..1" />
+          <End Role="Estudiante" Type="Self.Estudiante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grado">
+              <PropertyRef Name="ID_Grado" />
+            </Principal>
+            <Dependent Role="Estudiante">
+              <PropertyRef Name="ID_Grado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Estudiant__ID_Se__7C4F7684">
+          <End Role="Seccion" Type="Self.Seccion" Multiplicity="0..1" />
+          <End Role="Estudiante" Type="Self.Estudiante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seccion">
+              <PropertyRef Name="ID_Seccion" />
+            </Principal>
+            <Dependent Role="Estudiante">
+              <PropertyRef Name="ID_Seccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Estudiant__ID_Us__7D439ABD">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Estudiante" Type="Self.Estudiante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="ID_Usuario" />
+            </Principal>
+            <Dependent Role="Estudiante">
+              <PropertyRef Name="ID_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Personal__ID_Gen__6FE99F9F">
+          <End Role="Genero" Type="Self.Genero" Multiplicity="0..1" />
+          <End Role="Personal" Type="Self.Personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genero">
+              <PropertyRef Name="ID_Genero" />
+            </Principal>
+            <Dependent Role="Personal">
+              <PropertyRef Name="ID_Genero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Personal__ID_Gra__70DDC3D8">
+          <End Role="Grado" Type="Self.Grado" Multiplicity="0..1" />
+          <End Role="Personal" Type="Self.Personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grado">
+              <PropertyRef Name="ID_Grado" />
+            </Principal>
+            <Dependent Role="Personal">
+              <PropertyRef Name="ID_Grado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Personal__ID_Sec__71D1E811">
+          <End Role="Seccion" Type="Self.Seccion" Multiplicity="0..1" />
+          <End Role="Personal" Type="Self.Personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seccion">
+              <PropertyRef Name="ID_Seccion" />
+            </Principal>
+            <Dependent Role="Personal">
+              <PropertyRef Name="ID_Seccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Personal__ID_Tip__6EF57B66">
+          <End Role="Tipo_Personal" Type="Self.Tipo_Personal" Multiplicity="0..1" />
+          <End Role="Personal" Type="Self.Personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Personal">
+              <PropertyRef Name="ID_Tipo_Personal" />
+            </Principal>
+            <Dependent Role="Personal">
+              <PropertyRef Name="ID_Tipo_Personal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Personal__ID_Usu__72C60C4A">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Personal" Type="Self.Personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="ID_Usuario" />
+            </Principal>
+            <Dependent Role="Personal">
+              <PropertyRef Name="ID_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuario__ID_Rol__5535A963">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="ID_Rol" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="ID_Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ColegioBDv2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Apoderado" EntityType="Self.Apoderado" />
+          <EntitySet Name="Apoderado_Estudiante" EntityType="Self.Apoderado_Estudiante" />
+          <EntitySet Name="Asistencia" EntityType="Self.Asistencia" />
+          <EntitySet Name="Curso" EntityType="Self.Curso" />
+          <EntitySet Name="Detalle_Curso" EntityType="Self.Detalle_Curso" />
+          <EntitySet Name="Estado_Usuario" EntityType="Self.Estado_Usuario" />
+          <EntitySet Name="Estudiante" EntityType="Self.Estudiante" />
+          <EntitySet Name="Genero" EntityType="Self.Genero" />
+          <EntitySet Name="Grado" EntityType="Self.Grado" />
+          <EntitySet Name="Periodo" EntityType="Self.Periodo" />
+          <EntitySet Name="Personal" EntityType="Self.Personal" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" />
+          <EntitySet Name="Seccion" EntityType="Self.Seccion" />
+          <EntitySet Name="Tipo_Personal" EntityType="Self.Tipo_Personal" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK__Apoderado__ID_Ap__2B0A656D" Association="Self.FK__Apoderado__ID_Ap__2B0A656D">
+            <End Role="Apoderado" EntitySet="Apoderado" />
+            <End Role="Apoderado_Estudiante" EntitySet="Apoderado_Estudiante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Apoderado__ID_Ge__04E4BC85" Association="Self.FK__Apoderado__ID_Ge__04E4BC85">
+            <End Role="Genero" EntitySet="Genero" />
+            <End Role="Apoderado" EntitySet="Apoderado" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Apoderado__ID_Us__05D8E0BE" Association="Self.FK__Apoderado__ID_Us__05D8E0BE">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Apoderado" EntitySet="Apoderado" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Apoderado__ID_Es__2BFE89A6" Association="Self.FK__Apoderado__ID_Es__2BFE89A6">
+            <End Role="Estudiante" EntitySet="Estudiante" />
+            <End Role="Apoderado_Estudiante" EntitySet="Apoderado_Estudiante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asistenci__ID_Es__10566F31" Association="Self.FK__Asistenci__ID_Es__10566F31">
+            <End Role="Estudiante" EntitySet="Estudiante" />
+            <End Role="Asistencia" EntitySet="Asistencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Curso__ID_Person__0A9D95DB" Association="Self.FK__Curso__ID_Person__0A9D95DB">
+            <End Role="Personal" EntitySet="Personal" />
+            <End Role="Curso" EntitySet="Curso" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle_C__ID_Cu__25518C17" Association="Self.FK__Detalle_C__ID_Cu__25518C17">
+            <End Role="Curso" EntitySet="Curso" />
+            <End Role="Detalle_Curso" EntitySet="Detalle_Curso" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle_C__ID_Es__245D67DE" Association="Self.FK__Detalle_C__ID_Es__245D67DE">
+            <End Role="Estudiante" EntitySet="Estudiante" />
+            <End Role="Detalle_Curso" EntitySet="Detalle_Curso" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle_C__ID_Pe__2645B050" Association="Self.FK__Detalle_C__ID_Pe__2645B050">
+            <End Role="Periodo" EntitySet="Periodo" />
+            <End Role="Detalle_Curso" EntitySet="Detalle_Curso" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario__ID_Esta__5441852A" Association="Self.FK__Usuario__ID_Esta__5441852A">
+            <End Role="Estado_Usuario" EntitySet="Estado_Usuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Estudiant__ID_Ge__7A672E12" Association="Self.FK__Estudiant__ID_Ge__7A672E12">
+            <End Role="Genero" EntitySet="Genero" />
+            <End Role="Estudiante" EntitySet="Estudiante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Estudiant__ID_Gr__7B5B524B" Association="Self.FK__Estudiant__ID_Gr__7B5B524B">
+            <End Role="Grado" EntitySet="Grado" />
+            <End Role="Estudiante" EntitySet="Estudiante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Estudiant__ID_Se__7C4F7684" Association="Self.FK__Estudiant__ID_Se__7C4F7684">
+            <End Role="Seccion" EntitySet="Seccion" />
+            <End Role="Estudiante" EntitySet="Estudiante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Estudiant__ID_Us__7D439ABD" Association="Self.FK__Estudiant__ID_Us__7D439ABD">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Estudiante" EntitySet="Estudiante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Personal__ID_Gen__6FE99F9F" Association="Self.FK__Personal__ID_Gen__6FE99F9F">
+            <End Role="Genero" EntitySet="Genero" />
+            <End Role="Personal" EntitySet="Personal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Personal__ID_Gra__70DDC3D8" Association="Self.FK__Personal__ID_Gra__70DDC3D8">
+            <End Role="Grado" EntitySet="Grado" />
+            <End Role="Personal" EntitySet="Personal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Personal__ID_Sec__71D1E811" Association="Self.FK__Personal__ID_Sec__71D1E811">
+            <End Role="Seccion" EntitySet="Seccion" />
+            <End Role="Personal" EntitySet="Personal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Personal__ID_Tip__6EF57B66" Association="Self.FK__Personal__ID_Tip__6EF57B66">
+            <End Role="Tipo_Personal" EntitySet="Tipo_Personal" />
+            <End Role="Personal" EntitySet="Personal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Personal__ID_Usu__72C60C4A" Association="Self.FK__Personal__ID_Usu__72C60C4A">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Personal" EntitySet="Personal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario__ID_Rol__5535A963" Association="Self.FK__Usuario__ID_Rol__5535A963">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ColegioBDv2ModelStoreContainer" CdmEntityContainer="ColegioBDv2Entities">
+          <EntitySetMapping Name="Apoderado">
+            <EntityTypeMapping TypeName="ColegioBDv2Model.Apoderado">
+              <MappingFragment StoreEntitySet="Apoderado">
+                <ScalarProperty Name="ID_Apoderado" ColumnName="ID_Apoderado" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Estado_Registro" ColumnName="Estado_Registro" />
+                <ScalarProperty Name="ID_Genero" ColumnName="ID_Genero" />
+                <ScalarProperty Name="ID_Usuario" ColumnName="ID_Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Apoderado_Estudiante">
+            <EntityTypeMapping TypeName="ColegioBDv2Model.Apoderado_Estudiante">
+              <MappingFragment StoreEntitySet="Apoderado_Estudiante">
+                <ScalarProperty Name="ID_Apoderado" ColumnName="ID_Apoderado" />
+                <ScalarProperty Name="ID_Estudiante" ColumnName="ID_Estudiante" />
+                <ScalarProperty Name="Parentesco" ColumnName="Parentesco" />
+                <ScalarProperty Name="Estado_Registro" ColumnName="Estado_Registro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Asistencia">
+            <EntityTypeMapping TypeName="ColegioBDv2Model.Asistencia">
+              <MappingFragment StoreEntitySet="Asistencia">
+                <ScalarProperty Name="ID_Asistencia" ColumnName="ID_Asistencia" />
+                <ScalarProperty Name="Nombre_Tipo_Asistencia" ColumnName="Nombre_Tipo_Asistencia" />
+                <ScalarProperty Name="ID_Estudiante" ColumnName="ID_Estudiante" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Estado_Registro" ColumnName="Estado_Registro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Curso">
+            <EntityTypeMapping TypeName="ColegioBDv2Model.Curso">
+              <MappingFragment StoreEntitySet="Curso">
+                <ScalarProperty Name="ID_Curso" ColumnName="ID_Curso" />
+                <ScalarProperty Name="Nombre_Curso" ColumnName="Nombre_Curso" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Estado_Registro" ColumnName="Estado_Registro" />
+                <ScalarProperty Name="ID_Personal" ColumnName="ID_Personal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Detalle_Curso">
+            <EntityTypeMapping TypeName="ColegioBDv2Model.Detalle_Curso">
+              <MappingFragment StoreEntitySet="Detalle_Curso">
+                <ScalarProperty Name="ID_Estudiante" ColumnName="ID_Estudiante" />
+                <ScalarProperty Name="ID_Curso" ColumnName="ID_Curso" />
+                <ScalarProperty Name="ID_Periodo" ColumnName="ID_Periodo" />
+                <ScalarProperty Name="Competencia1" ColumnName="Competencia1" />
+                <ScalarProperty Name="Competencia2" ColumnName="Competencia2" />
+                <ScalarProperty Name="Competencia3" ColumnName="Competencia3" />
+                <ScalarProperty Name="Competencia4" ColumnName="Competencia4" />
+                <ScalarProperty Name="Proyecto" ColumnName="Proyecto" />
+                <ScalarProperty Name="ExamenFinal" ColumnName="ExamenFinal" />
+                <ScalarProperty Name="Estado_Registro" ColumnName="Estado_Registro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estado_Usuario">
+            <EntityTypeMapping TypeName="ColegioBDv2Model.Estado_Usuario">
+              <MappingFragment StoreEntitySet="Estado_Usuario">
+                <ScalarProperty Name="ID_Estado_Usuario" ColumnName="ID_Estado_Usuario" />
+                <ScalarProperty Name="Nombre_Estado_Usuario" ColumnName="Nombre_Estado_Usuario" />
+                <ScalarProperty Name="Estado_Registro" ColumnName="Estado_Registro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estudiante">
+            <EntityTypeMapping TypeName="ColegioBDv2Model.Estudiante">
+              <MappingFragment StoreEntitySet="Estudiante">
+                <ScalarProperty Name="ID_Estudiante" ColumnName="ID_Estudiante" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Fecha_Nacimiento" ColumnName="Fecha_Nacimiento" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Estado_Registro" ColumnName="Estado_Registro" />
+                <ScalarProperty Name="ID_Genero" ColumnName="ID_Genero" />
+                <ScalarProperty Name="ID_Grado" ColumnName="ID_Grado" />
+                <ScalarProperty Name="ID_Seccion" ColumnName="ID_Seccion" />
+                <ScalarProperty Name="ID_Usuario" ColumnName="ID_Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genero">
+            <EntityTypeMapping TypeName="ColegioBDv2Model.Genero">
+              <MappingFragment StoreEntitySet="Genero">
+                <ScalarProperty Name="ID_Genero" ColumnName="ID_Genero" />
+                <ScalarProperty Name="Nombre_Genero" ColumnName="Nombre_Genero" />
+                <ScalarProperty Name="Estado_Registro" ColumnName="Estado_Registro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grado">
+            <EntityTypeMapping TypeName="ColegioBDv2Model.Grado">
+              <MappingFragment StoreEntitySet="Grado">
+                <ScalarProperty Name="ID_Grado" ColumnName="ID_Grado" />
+                <ScalarProperty Name="Numero_Grado" ColumnName="Numero_Grado" />
+                <ScalarProperty Name="Estado_Registro" ColumnName="Estado_Registro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Periodo">
+            <EntityTypeMapping TypeName="ColegioBDv2Model.Periodo">
+              <MappingFragment StoreEntitySet="Periodo">
+                <ScalarProperty Name="ID_Periodo" ColumnName="ID_Periodo" />
+                <ScalarProperty Name="Nombre_Periodo" ColumnName="Nombre_Periodo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Estado_Registro" ColumnName="Estado_Registro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personal">
+            <EntityTypeMapping TypeName="ColegioBDv2Model.Personal">
+              <MappingFragment StoreEntitySet="Personal">
+                <ScalarProperty Name="ID_Personal" ColumnName="ID_Personal" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Fecha_Nacimiento" ColumnName="Fecha_Nacimiento" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Firma" ColumnName="Firma" />
+                <ScalarProperty Name="Sello" ColumnName="Sello" />
+                <ScalarProperty Name="Estado_Registro" ColumnName="Estado_Registro" />
+                <ScalarProperty Name="ID_Tipo_Personal" ColumnName="ID_Tipo_Personal" />
+                <ScalarProperty Name="ID_Genero" ColumnName="ID_Genero" />
+                <ScalarProperty Name="ID_Grado" ColumnName="ID_Grado" />
+                <ScalarProperty Name="ID_Seccion" ColumnName="ID_Seccion" />
+                <ScalarProperty Name="ID_Usuario" ColumnName="ID_Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rol">
+            <EntityTypeMapping TypeName="ColegioBDv2Model.Rol">
+              <MappingFragment StoreEntitySet="Rol">
+                <ScalarProperty Name="ID_Rol" ColumnName="ID_Rol" />
+                <ScalarProperty Name="Nombre_Rol" ColumnName="Nombre_Rol" />
+                <ScalarProperty Name="Permiso" ColumnName="Permiso" />
+                <ScalarProperty Name="Estado_Registro" ColumnName="Estado_Registro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seccion">
+            <EntityTypeMapping TypeName="ColegioBDv2Model.Seccion">
+              <MappingFragment StoreEntitySet="Seccion">
+                <ScalarProperty Name="ID_Seccion" ColumnName="ID_Seccion" />
+                <ScalarProperty Name="Nombre_Seccion" ColumnName="Nombre_Seccion" />
+                <ScalarProperty Name="Aforo" ColumnName="Aforo" />
+                <ScalarProperty Name="Estado_Registro" ColumnName="Estado_Registro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipo_Personal">
+            <EntityTypeMapping TypeName="ColegioBDv2Model.Tipo_Personal">
+              <MappingFragment StoreEntitySet="Tipo_Personal">
+                <ScalarProperty Name="ID_Tipo_Personal" ColumnName="ID_Tipo_Personal" />
+                <ScalarProperty Name="Nombre_Tipo_Personal" ColumnName="Nombre_Tipo_Personal" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Estado_Registro" ColumnName="Estado_Registro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="ColegioBDv2Model.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="ID_Usuario" ColumnName="ID_Usuario" />
+                <ScalarProperty Name="Nombre_Usuario" ColumnName="Nombre_Usuario" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Fecha_Creacion" ColumnName="Fecha_Creacion" />
+                <ScalarProperty Name="Ultimo_Acceso" ColumnName="Ultimo_Acceso" />
+                <ScalarProperty Name="Estado_Registro" ColumnName="Estado_Registro" />
+                <ScalarProperty Name="ID_Estado_Usuario" ColumnName="ID_Estado_Usuario" />
+                <ScalarProperty Name="ID_Rol" ColumnName="ID_Rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

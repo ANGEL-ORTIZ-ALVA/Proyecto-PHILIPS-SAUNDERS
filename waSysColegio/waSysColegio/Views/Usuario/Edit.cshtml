@@ -1,0 +1,199 @@
+﻿@model waSysColegio.Usuario
+
+@{
+    ViewBag.Title = "Edit";
+    // Agregar esto para ver los valores
+    var estadoActual = Model.ID_Estado_Usuario;
+    var rolActual = Model.ID_Rol;
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-container">
+        <h2 style="text-align: center; margin-bottom: 40px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);">Editar al usuario "@Html.DisplayFor(model => model.Nombre_Usuario)"</h2>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID_Usuario)
+        @Html.HiddenFor(model => model.Fecha_Creacion)
+        @Html.HiddenFor(model => model.Ultimo_Acceso)
+        <div class="form">
+            <div class="form-group">
+                <label>Nombre de usuario:</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Nombre_Usuario, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Nombre_Usuario, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Estado de registro</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Estado_Registro, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Estado_Registro, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Estado del usuario</label>
+                <div class="col-md-10">
+                    <div><strong>Estado actual del usuario:</strong> @Html.DisplayFor(model => model.Estado_Usuario.Nombre_Estado_Usuario)</div>
+                    @Html.DropDownListFor(model => model.ID_Estado_Usuario,
+                        (SelectList)ViewBag.ID_Estado_Usuario,
+                        new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ID_Estado_Usuario, "", new { @class = "text-danger", value = rolActual })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Rol del usuario</label>
+                <div class="col-md-10">
+                    <div><strong>Rol actual del usuario:</strong> @Html.DisplayFor(model => model.Rol.Nombre_Rol)</div>
+                    @Html.DropDownListFor(model => model.ID_Rol,
+                        (SelectList)ViewBag.ID_Rol,
+                        new { @class = "form-control", value = rolActual })
+                    @Html.ValidationMessageFor(model => model.ID_Rol, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                @Html.ActionLink("Cancelar", "/Index")
+            </div>
+        </div>
+    </div>
+}
+<style>
+    /* Estilos generales */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f1f1f1;
+        margin: 0;
+        padding: 0;
+        color: #333;
+    }
+
+    /* Contenedor del formulario */
+    .form-container {
+        max-width: 450px;
+        margin: 40px auto;
+        padding: 30px;
+        background-color: #ededed;
+        border-radius: 30px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: center;
+    }
+
+    h2 {
+        font-size: 28px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 30px;
+        color: #4c8eaf;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Estilos de los grupos de formularios */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+        .form-group label {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .form-group .col-md-10 {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Estilo de los campos de entrada */
+        .form-group .form-control {
+            padding: 12px 18px;
+            font-size: 15px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            transition: all 0.3s ease;
+            background-color: #f9f9f9;
+        }
+
+            .form-group .form-control:focus {
+                border-color: #4CAF50;
+                outline: none;
+                box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+            }
+
+        /* Mensajes de validación */
+        .form-group .text-danger {
+            font-size: 12px;
+            color: #f44336;
+        }
+
+    /* Estilos para el botón de submit */
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 15px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    /* Enlace para cancelar */
+    .form-group a {
+        color: #888;
+        font-size: 16px;
+        text-decoration: none;
+        margin-left: 10px;
+        transition: color 0.3s ease;
+    }
+
+        .form-group a:hover {
+            color: #007bff;
+        }
+
+    /* Estilos para el select dropdown */
+    select.form-control {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-color: #fff;
+        background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"%3E%3Cpath d="M6 7l4 4 4-4z"%3E%3C/path%3E%3C/svg%3E');
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 12px;
+        padding-right: 30px;
+    }
+
+    /* Contenedor del botón de submit */
+    .col-md-offset-2 {
+        margin-left: 20px;
+    }
+
+    .form-container .col-md-10 {
+        padding-right: 0;
+    }
+</style>
+

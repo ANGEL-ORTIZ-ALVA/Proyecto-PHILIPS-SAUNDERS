@@ -1,0 +1,125 @@
+﻿@model waSysColegio.Estudiante
+
+@{
+    ViewBag.Title = "Create";
+}
+<link rel="stylesheet" href="~/Styles/Formulario.css" />
+<link rel="icon" type="image/png" href="~/Resources/logo-school.png" />
+<link rel="shortcut icon" type="image/x-icon" href="~/Resources/logo-school.png" />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-container">
+        <h2 class="form-title">Registrar Estudiante</h2> <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="form-label">Nombre</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control input" } })
+                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Apellido</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Apellido, new { htmlAttributes = new { @class = "form-control input", type = "text" } })
+                @Html.ValidationMessageFor(model => model.Apellido, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Fecha de Nacimiento</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Fecha_Nacimiento, new { @class = "form-control input", type = "date" })
+                @Html.ValidationMessageFor(model => model.Fecha_Nacimiento, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">DNI</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.DNI, new { @class = "form-control", type = "number", id = "DNI" })
+                @Html.ValidationMessageFor(model => model.DNI, "", new { @class = "text-danger" })
+            </div>
+             <span id="dni-error" class="text-danger" style="display:none;"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Direccion</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" style="display:none">
+            <label class="form-label">Estado de registro</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Estado_Registro, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Estado_Registro, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Genero</label>
+            <div class="col-md-10">
+                @Html.DropDownList("ID_Genero", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ID_Genero, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Grado</label>
+            <div class="col-md-10">
+                @Html.DropDownList("ID_Grado", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ID_Grado, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Seccion</label>
+            <div class="col-md-10">
+                @Html.DropDownList("ID_Seccion", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ID_Seccion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Usuario</label>
+            <div class="col-md-10">
+                @Html.DropDownList("ID_Usuario", null, htmlAttributes: new { @class = "form-control input" })
+                @Html.ValidationMessageFor(model => model.ID_Usuario, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group form-actions">
+            <input type="submit" value="Registrar" class="btn btn-primary" />
+            <a href="@Url.Action("/Index")" class="btn btn-secondary">Regresar</a>
+        </div>
+    </div>
+}
+<style>
+    input#Fecha_Nacimiento {
+        padding: 5px 20px;
+        width: 90px;
+    }
+</style>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+  /*  $(document).ready(function () {
+    $("#DNI").on("blur", function () {
+        var dni = $(this).val();
+        $.getJSON("/EstudianteController/VerificarDniUnico", { dni: dni }, function (esUnico) {
+            if (!esUnico) {
+                $("#dni-error").text("El DNI ingresado ya existe.").show();
+            } else {
+                $("#dni-error").text("").hide();
+            }
+        });
+    });
+    });*/
+
+</script>

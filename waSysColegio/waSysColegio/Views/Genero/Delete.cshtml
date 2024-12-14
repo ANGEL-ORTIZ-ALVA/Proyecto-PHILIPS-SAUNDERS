@@ -1,0 +1,39 @@
+﻿@model waSysColegio.Genero
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+@Html.Partial("_Head_Content")
+<link rel="stylesheet" href="~/Styles/Formulario.css" />
+<link rel="icon" type="image/png" href="~/Resources/logo-school.png" />
+<link rel="shortcut icon" type="image/x-icon" href="~/Resources/logo-school.png" />
+
+<div class="delete-container">
+    <h2 class="delete-title">Confirmar eliminación</h2>
+    <h3 class="delete-warning">¿Está seguro de que desea eliminar este registro?</h3>   <hr />
+    <dl class="delete-details">
+        <dt>Nombre del Genero</dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre_Genero)
+        </dd>
+
+        <dt>Estado de Registro</dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado_Registro)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="delete-actions">
+            <input type="submit" value="Eliminar" class="btn btn-danger" />
+            @Html.ActionLink("Cancelar", "/Index", null, new { @class = "btn btn-secondary" })
+        </div>
+    }
+</div>

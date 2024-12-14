@@ -1,0 +1,174 @@
+﻿@model IEnumerable<waSysColegio.Detalle_Curso>
+@Html.Partial("_Head_Content")
+@Html.Partial("_Sidebar")
+
+<style>
+    /*body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        background-color: #e2f3ef;
+        color: #212529;
+        text-align: center;
+    }
+
+    h2 {
+        color: #02666a;
+        margin: 20px 0;
+        font-size: 1.8rem;
+    }  */
+
+    form {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+        margin-right: 5px;
+        font-size:22px;
+    }
+
+    .form-group select {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 5px;
+        font-size: 1rem;
+    }
+
+    .btn {
+        background-color: #1de356;
+        color: #ffffff;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 15px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+        width:100px;
+        height:35px;
+    }
+
+        .btn:hover {
+            background-color: #68d19d;
+            transform: scale(1.05);
+        }
+
+    .table {
+        margin: 0 auto;
+        border-collapse: collapse;
+        width: 90%;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+        .table th {
+            background-color: #008fe6;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .table td {
+            padding: 10px;
+            text-align: center;
+        }
+
+
+    
+</style>
+
+<section class="home">
+    <div class="text">
+        <figure>
+            <img src="../Resources/logo-school.png" width="50" height="50" />
+        </figure>
+        <h2>Colegio 'Philip P. Saunders'</h2>
+    </div>
+    <div class="text">
+        <div class="form-container">
+
+
+            <h3 class="form-title">Lista de notas académicas</h3>
+            <!-- Filtros -->
+            <h4>Consulta de Notas</h4>
+            <div class="table-responsive">
+                <form method="get" action="@Url.Action("Index")" class="form-inline">
+                    <div class="form-group">
+                        <label for="idEstudiante">Estudiante:</label>
+                        @Html.DropDownList("idEstudiante",
+                            ViewBag.idEstudiante as SelectList,
+                            "Seleccione un estudiante",
+                            new
+                            {
+                                @class = "form-control",
+                            })
+                        @if (ViewBag.DesactivarEstudiante == true)
+                        {
+                            <!-- Campo oculto para enviar el valor del estudiante -->
+                            <input type="hidden" name="idEstudiante" value="@((ViewBag.idEstudiante as SelectList)?.FirstOrDefault()?.Value)" />
+                        }
+                    </div>
+                    <div class="form-group">
+                        <label for="idCurso">Curso:</label>
+                        @Html.DropDownList("idCurso", ViewBag.idCurso as SelectList, "Todos", new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label for="idSeccion">Sección:</label>
+                        @Html.DropDownList("idSeccion", ViewBag.idSeccion as SelectList, "Todas", new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label for="idPeriodo">Periodo:</label>
+                        @Html.DropDownList("idPeriodo", ViewBag.idPeriodo as SelectList, "Todos", new { @class = "form-control" })
+                    </div>
+                    <button type="submit" class="btn">Filtrar</button>
+                </form>
+
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Estudiante</th>
+                            <th>Curso</th>
+                            <th>Periodo</th>
+                            <th>Competencia 1</th>
+                            <th>Competencia 2</th>
+                            <th>Competencia 3</th>
+                            <th>Competencia 4</th>
+                            <th>Proyecto</th>
+                            <th>Examen Final</th>
+                            <th>Promedio Final</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            var promedio = (item.Competencia1.GetValueOrDefault(0) +
+                                            item.Competencia2.GetValueOrDefault(0) +
+                                            item.Competencia3.GetValueOrDefault(0) +
+                                            item.Competencia4.GetValueOrDefault(0) +
+                                            item.Proyecto.GetValueOrDefault(0) +
+                                            item.ExamenFinal.GetValueOrDefault(0)) / 6;
+
+                            <tr>
+                                <td>@item.Estudiante.Nombre @item.Estudiante.Apellido</td>
+                                <td>@item.Curso.Nombre_Curso</td>
+                                <td>@item.Periodo.Nombre_Periodo</td>
+                                <td>@item.Competencia1</td>
+                                <td>@item.Competencia2</td>
+                                <td>@item.Competencia3</td>
+                                <td>@item.Competencia4</td>
+                                <td>@item.Proyecto</td>
+                                <td>@item.ExamenFinal</td>
+                                <td>@promedio.ToString("F2")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+@Html.Partial("_Footer")

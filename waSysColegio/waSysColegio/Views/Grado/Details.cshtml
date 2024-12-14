@@ -1,0 +1,37 @@
+﻿@model waSysColegio.Grado
+
+@{
+    ViewBag.Title = "Details";
+}
+@Html.Partial("_Head_Content")
+<link rel="stylesheet" href="~/Styles/Formulario.css" />
+<link rel="icon" type="image/png" href="~/Resources/logo-school.png" />
+<link rel="shortcut icon" type="image/x-icon" href="~/Resources/logo-school.png" />
+
+
+<div class="details-container">
+    <h2 class="details-title">Detalles del grado</h2>
+    <hr />
+    <dl class="details-list">
+        <dt>
+            Nombre de grado
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Numero_Grado)
+        </dd>
+
+        <dt>
+            Estado de registro
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado_Registro)
+        </dd>
+
+    </dl>
+<div class="details-actions">
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ID_Grado }, new { @class = "btn btn-primary" }) 
+    @Html.ActionLink("Volver a la lista de grados", "/Index", null, new { @class = "btn btn-secondary" })
+</div>
+</div>

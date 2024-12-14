@@ -1,0 +1,154 @@
+﻿@model waSysColegio.Rol
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<div class="delete-container">
+    <h2 class="delete-title">Eliminar Rol</h2>
+    <h3 class="delete-confirm">¿Está seguro que desea eliminar el rol "@Html.DisplayFor(model => model.Nombre_Rol)"?</h3>
+    <hr />
+    <div class="delete-details">
+        <h4>Detalles del Rol</h4>
+
+        <dl class="details-list">
+            <dt>Nombre del rol</dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Nombre_Rol)
+            </dd>
+
+            <dt>Descripción del Permiso</dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Permiso)
+            </dd>
+
+            <dt>Estado de Registro</dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Estado_Registro)
+            </dd>
+
+        </dl>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions">
+        <input type="submit" value="Eliminar" class="btn btn-delete" />
+        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-cancel" })
+    </div>
+    }
+</div>
+<style>
+    * {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+        padding-bottom: 0px;
+        padding-top: 0px;
+    }
+    /* Contenedor general */
+    .delete-container {
+        max-width: 600px;
+        margin: 30px auto;
+        padding: 10px 25px;
+        background-color: #f9f9f9;
+        border: 1px solid #e0e0e0;
+        border-radius: 25px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Título */
+    .delete-title {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        color: #d9534f;
+        margin-bottom: 20px;
+    }
+
+    /* Confirmación de eliminación */
+    .delete-confirm {
+        text-align: center;
+        font-size: 18px;
+        color: #555;
+        margin-bottom: 30px;
+    }
+
+    /* Detalles del usuario */
+    .delete-details h4 {
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .details-list {
+        margin: 20px 0;
+        font-size: 16px;
+        color: #444;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-content: center;
+    }
+
+        .details-list dt {
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .details-list dd {
+            margin-left: 0px;
+            margin-bottom: 15px;
+        }
+
+    /* Botones */
+    .form-actions {
+        display: flex;
+        justify-content: center;
+        gap: 45px;
+        margin-top: 20px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 15px;
+        text-decoration: none;
+        text-align: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-delete {
+        background-color: #d9534f;
+        color: white;
+        border: 1px solid #d9534f;
+    }
+
+        .btn-delete:hover {
+            background-color: #c9302c;
+            box-shadow: 0px 0px 15px 8px rgba(255, 0, 0, 0.5);
+        }
+
+    .btn-cancel {
+        background-color: #676767;
+        color: white;
+        border: 1px solid #676767;
+    }
+
+        .btn-cancel:hover {
+            background-color: #4b4b4b;
+            box-shadow: 0px 0px 15px 8px rgba(2, 2, 2, 0.5);
+        }
+</style>

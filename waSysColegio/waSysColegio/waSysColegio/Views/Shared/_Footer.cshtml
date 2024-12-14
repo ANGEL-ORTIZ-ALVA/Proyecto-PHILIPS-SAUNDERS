@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "_Footer";
+}
+
+<script src="../Scripts/Dashboard.js"></script>
+<script>
+    function logout() {
+        if (confirm("¿Estás seguro de que deseas cerrar sesión?")) {
+            // Eliminar la cookie de sesión en el cliente
+            document.cookie = "ASP.NET_SessionId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            document.cookie = ".ASPXAUTH=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+            // Redirigir a la página de logout en el servidor
+            window.location.href = "../Logout.aspx";
+            alert("Sesión cerrada con éxito");
+        } else {
+            window.location.href = "../Pages/Dashboard.aspx";
+        }
+    }
+
+
+</script>
+
+<!-- Agrega estas líneas antes del cierre del body -->
+<script src="~/Scripts/jquery-3.7.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>

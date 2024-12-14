@@ -1,0 +1,112 @@
+﻿@model IEnumerable<waSysColegio.Apoderado_Estudiante>
+
+@{
+    ViewBag.Title = "Index";
+}
+@Html.Partial("_Head_Content")
+@Html.Partial("_Sidebar")
+
+<section class="home">
+    <div class="text">
+        <figure>
+            <img src="../Resources/logo-school.png" width="50" height="50" />
+        </figure>
+        <h2>Colegio 'Philip P. Saunders'</h2>
+    </div>
+    <div class="text">
+        <div class="form-container">
+            <h4 class="form-title">Lista de apoderados de los estudiantes</h4>
+            <div style="margin: 20px 0px;">
+                @Html.ActionLink("Asignar Nuevo Apoderado", "Create", null, new { @class = "btn btn-success" })
+            </div>
+            
+            <div class="table-responsive">
+                <table class="table">
+                    <tr>
+                        <th>
+                            Apoderado
+                        </th>
+                        <th>
+                            Estudiante
+                        </th>
+                        <th>
+                            Parentesco
+                        </th>
+                        <th>
+                            Estado Registro
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Apoderado.Nombre)
+                                @Html.DisplayFor(modelItem => item.Apoderado.Apellido)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Estudiante.Nombre)
+                                @Html.DisplayFor(modelItem => item.Estudiante.Apellido)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Parentesco) del estudiante
+                                @Html.DisplayFor(modelItem => item.Estudiante.Nombre)
+
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Estado_Registro)
+                            </td>
+                            <td>
+                                <div class="btn-group">
+                                    @Html.ActionLink("Editar", "Edit", new { ID_Apoderado = item.ID_Apoderado, ID_Estudiante = item.ID_Estudiante }, new { @class = "editar", style = "margin-right: 5px;" })
+                                    @Html.ActionLink("Detalles", "Details", new { ID_Apoderado = item.ID_Apoderado, ID_Estudiante = item.ID_Estudiante }, new { @class = "info", style = "margin-right: 5px;" })
+                                    @Html.ActionLink("Eliminar", "Delete", new { ID_Apoderado = item.ID_Apoderado, ID_Estudiante = item.ID_Estudiante }, new { @class = "borrar" })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<style>
+    .btn {
+        text-decoration: none;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn-primary {
+        background-color: #4CAF50;
+        color: #fff;
+    }
+
+        .btn-primary:hover {
+            background-color: #3e8e41;
+        }
+
+    .btn-info {
+        background-color: #03A9F4;
+        color: #fff;
+    }
+
+        .btn-info:hover {
+            background-color: #0397d6;
+        }
+
+    .btn-danger {
+        background-color: #F44336;
+        color: #fff;
+    }
+
+        .btn-danger:hover {
+            background-color: #cb362c;
+        }
+</style>
+@Html.Partial("_Footer")

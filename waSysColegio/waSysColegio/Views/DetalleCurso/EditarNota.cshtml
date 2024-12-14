@@ -1,0 +1,48 @@
+﻿@model waSysColegio.Models.DetalleCurso
+
+@{
+    ViewBag.Title = "EditarNota";
+}
+
+@section Styles {
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/bootstrap.min.js"></script>
+}
+<h2>EditarNota</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(m => m.ID_Estudiante)
+    @Html.HiddenFor(m => m.ID_Curso)
+    @Html.HiddenFor(m => m.ID_Evaluacion)
+    @Html.HiddenFor(m => m.ID_Asistencia)
+    @Html.HiddenFor(m => m.ID_Periodo)
+    @Html.HiddenFor(m => m.Estado_Registro)
+
+    <div class="form-group">
+        <label>Estudiante: @Model.NombreEstudiante @Model.ApellidoEstudiante</label>
+    </div>
+    <div class="form-group">
+        <label>Curso: @Model.NombreCurso</label>
+    </div>
+    <div class="form-group">
+        <label>Evaluación: @Model.NombreEvaluacion</label>
+    </div>
+    <div class="form-group">
+        <label>Periodo: @Model.NombrePeriodo</label>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Nota, "Nota:")
+        @Html.TextBoxFor(m => m.Nota, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Nota)
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    @Html.ActionLink("Cancelar", "VerNotas", new { idEstudiante = Model.ID_Estudiante }, new { @class = "btn btn-secondary" })
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+

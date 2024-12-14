@@ -1,0 +1,98 @@
+﻿@model waSysColegio.Apoderado
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@Html.Partial("_Head_Content")
+<link rel="stylesheet" href="~/Styles/Formulario.css" />
+<link rel="icon" type="image/png" href="~/Resources/logo-school.png" />
+<link rel="shortcut icon" type="image/x-icon" href="~/Resources/logo-school.png" />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-container">
+    <h2 class="form-title">Editar Apoderado Estudiante</h2> <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ID_Apoderado)
+
+    <div class="form-group">
+        <label class="form-label">Nombre</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control input" } })
+            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Apellido</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Apellido, new { htmlAttributes = new { @class = "form-control input" } })
+            @Html.ValidationMessageFor(model => model.Apellido, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">DNI</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.DNI, new { @class = "form-control", type = "number" })
+            @Html.ValidationMessageFor(model => model.DNI, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Correo</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Correo, new { htmlAttributes = new { @class = "form-control input" } })
+            @Html.ValidationMessageFor(model => model.Correo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Telefono</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control input" } })
+            @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Direccion</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control input" } })
+            @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Estado Registro</label>
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Estado_Registro, new SelectList(new List<string> { "Registrado", "Eliminado" }), new { @class = "form-control input" })
+            @Html.ValidationMessageFor(model => model.Estado_Registro, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Genero</label>
+        <div class="col-md-10">
+            @Html.DropDownList("ID_Genero", null, htmlAttributes: new { @class = "form-control input" })
+            @Html.ValidationMessageFor(model => model.ID_Genero, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Usuario</label>
+        <div class="col-md-10">
+            @Html.DropDownList("ID_Usuario", null, htmlAttributes: new { @class = "form-control input" })
+            @Html.ValidationMessageFor(model => model.ID_Usuario, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group form-actions">
+        <input type="submit" value="Guardar" class="btn btn-primary" />
+        <a href="@Url.Action("/Index")" class="btn btn-secondary">Regresar</a>
+    </div>
+</div>
+}

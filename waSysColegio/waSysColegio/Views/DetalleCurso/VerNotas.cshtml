@@ -1,0 +1,202 @@
+﻿@model IEnumerable<waSysColegio.Models.DetalleCurso>
+@{
+    ViewBag.Title = "VerNotas";
+}
+@Html.Partial("_Head_Content")
+@Html.Partial("_Sidebar")
+
+<h2>Notas de @ViewBag.EstudianteNombre</h2>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+<style>
+    .search-box label{
+        font-size:18px;
+    }
+    .editar {
+        background-color: #007bff;
+    }
+        .editar:hover {
+            background-color: #47a0ff;
+        }
+    .btn-filtrar {
+        padding: 10px 20px;
+        border-radius: 10px;
+        border: none;
+        background-color: #218d87;
+        color: #fff;
+    }
+        .btn-filtrar:hover {
+            background-color: #36cbc3;
+            color: #fff;
+        }
+
+    .url {
+        font-size: 18px;
+        padding: 0px;
+        color: gray;
+    }
+    .url:hover {
+        color: dodgerblue;
+    }
+
+</style>
+
+<section class="home">
+    <div class="text">
+        <figure>
+            <img src="../Resources/logo-school.png" width="50" height="50" />
+        </figure>
+        <h2>Colegio 'Philip P. Saunders'</h2>
+    </div>
+    <div class="text">
+        <div class="form-container">
+            <form method="get" action="@Url.Action("VerNotas", "DetalleCurso")">
+                <div class="search-box" style="margin-bottom:15px;">
+                    <input type="hidden" name="idEstudiante" value="@ViewBag.IdEstudiante" />
+
+                    <label for="idCurso">Curso:</label>
+                    <select id="idCurso" name="idCurso" class="input">
+                        <option value="">Todos</option>
+                        @foreach (var curso in ViewBag.Cursos)
+                        {
+                            <option value="@curso.ID_Curso">@curso.Nombre_Curso</option>
+                        }
+                    </select>
+
+                    <label for="idEvaluacion">Evaluación:</label>
+                    <select id="idEvaluacion" name="idEvaluacion" class="input">
+                        <option value="">Todas</option>
+                        @foreach (var evaluacion in ViewBag.Evaluaciones)
+                        {
+                            <option value="@evaluacion.ID_Evaluacion">@evaluacion.Nombre_Evaluacion</option>
+                        }
+                    </select>
+
+                    <label for="idAsistencia">Asistencia:</label>
+                    <select id="idAsistencia" name="idAsistencia" class="input">
+                        <option value="">Todas</option>
+                        @foreach (var asistencia in ViewBag.Asistencias)
+                        {
+                            <option value="@asistencia.ID_Asistencia">@asistencia.Nombre_Tipo_Asistencia</option>
+                        }
+                    </select>
+
+                    <label for="idPeriodo">Periodo:</label>
+                    <select id="idPeriodo" name="idPeriodo" class="input">
+                        <option value="">Todos</option>
+                        @foreach (var periodo in ViewBag.Periodos)
+                        {
+                            <option value="@periodo.ID_Periodo">@periodo.Nombre_Periodo</option>
+                        }
+                    </select>
+
+                    <button type="submit" class="btn-filtrar btn-primary">Filtrar</button>
+                </div>
+            </form>
+
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th>Curso</th>
+                        <th>Evaluación</th>
+                        <th>Asistencia</th>
+                        <th>Periodo</th>
+                        <th>Nota</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var nota in Model)
+                    {
+                        <tr>
+                            <td>@nota.NombreCurso</td>
+                            <td>@nota.NombreEvaluacion</td>
+                            <td>@nota.NombreAsistencia</td>
+                            <td>@nota.NombrePeriodo</td>
+                            <td>@nota.Nota</td>
+                            <td>
+                                @Html.ActionLink("Editar", "EditarNota", new
+                                {
+                                    idEstudiante = nota.ID_Estudiante,
+                                    idCurso = nota.ID_Curso,
+                                    idEvaluacion = nota.ID_Evaluacion,
+                                    idAsistencia = nota.ID_Asistencia,
+                                    idPeriodo = nota.ID_Periodo
+                                }, new { @class = "btn editar" })
+
+                                <button type="button" class="btn borrar"
+                                        onclick="confirmarEliminar(@nota.ID_Estudiante, @nota.ID_Curso, @nota.ID_Evaluacion, @nota.ID_Asistencia, @nota.ID_Periodo)">
+                                    Eliminar
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <div>
+                <p>
+                    @Html.ActionLink("Volver a lista de Estudiantes", "VerEstudiante", "Estudiante", null, new { @class = "btn url" })
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Modal de confirmación -->
+    <div class="modal fade" id="modalConfirmacion" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmar Eliminación</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ¿Está seguro que desea eliminar esta nota?
+                </div>
+                <div class="modal-footer">
+                    <form id="formEliminar" method="post">
+                        @Html.AntiForgeryToken()
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        <script>
+        function confirmarEliminar(idEstudiante, idCurso, idEvaluacion, idAsistencia, idPeriodo) {
+            // Construir la URL para el formulario
+            var url = '@Url.Action("EliminarNota")' +
+                '?idEstudiante=' + idEstudiante +
+                '&idCurso=' + idCurso +
+                '&idEvaluacion=' + idEvaluacion +
+                '&idAsistencia=' + idAsistencia +
+                '&idPeriodo=' + idPeriodo;
+
+            // Actualizar la acción del formulario
+            $('#formEliminar').attr('action', url);
+
+            // Mostrar el modal
+            $('#modalConfirmacion').modal('show');
+        }
+        </script>
+    }
+    @Html.Partial("_Footer")

@@ -1,0 +1,67 @@
+﻿@model List<waSysColegio.Models.GradoSeccionViewModel>
+@{
+    ViewBag.Title = "SeleccionarGradoSeccion";
+}
+@Html.Partial("_Head_Content")
+@Html.Partial("_Sidebar")
+
+<section class="home">
+    <div class="text">
+        <figure>
+            <img src="../Resources/logo-school.png" width="50" height="50" />
+        </figure>
+        <h2>Colegio 'Philip P. Saunders'</h2>
+    </div>
+    <div class="text">
+        <h2>Seleccionar Grado y Sección</h2>
+
+        <form method="get" class="form-container" action="@Url.Action("ListaEstudiantes", "Libreta")">
+            <label for="grado">Grado:</label>
+            <select id="grado" name="ID_Grado" class="input" onchange="cargarSecciones()">
+                <option value="">Seleccione un grado</option>
+                @foreach (var grado in Model)
+                {
+                    <option value="@grado.ID_Grado">@grado.Numero_Grado</option>
+                }
+            </select>
+
+            <label for="seccion">Sección:</label>
+            <select id="seccion" name="ID_Seccion" class="input">
+                <option value="">Seleccione una sección</option>
+            </select>
+
+            <button type="submit" class="btn btn-primary">Ver Lista de Estudiantes</button>
+        </form>
+
+        <div id="estudiantesList">
+            <!-- Aquí se cargarán los estudiantes tras seleccionar Grado y Sección -->
+        </div>
+    </div>
+</section>
+
+<script>
+    var gradosData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+
+    function cargarSecciones() {
+        var gradoId = document.getElementById("grado").value;
+        var seccionSelect = document.getElementById("seccion");
+        seccionSelect.innerHTML = "<option value=''>Seleccione una sección</option>";
+
+        if (!gradoId) return; // Evitar errores si no se selecciona grado
+
+        var grado = gradosData.find(g => g.ID_Grado == gradoId);
+        if (grado && grado.Secciones) {
+            grado.Secciones.forEach(seccion => {
+                var option = document.createElement("option");
+                option.value = seccion.ID_Seccion;
+                option.text = seccion.Nombre_Seccion;
+                seccionSelect.appendChild(option);
+            });
+        } else {
+            alert("No hay secciones disponibles para este grado.");
+        }
+    }
+</script>
+
+@Html.Partial("_Footer")
+

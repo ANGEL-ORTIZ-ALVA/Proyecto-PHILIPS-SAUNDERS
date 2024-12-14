@@ -1,0 +1,52 @@
+﻿@model waSysColegio.Curso
+
+@{
+    ViewBag.Title = "Details";
+}
+@Html.Partial("_Head_Content")
+<link rel="stylesheet" href="~/Styles/Formulario.css" />
+<link rel="icon" type="image/png" href="~/Resources/logo-school.png" />
+<link rel="shortcut icon" type="image/x-icon" href="~/Resources/logo-school.png" />
+
+<div class="details-container">
+    <h2 class="details-title">Detalle del Curso "@Html.DisplayFor(model => model.Nombre_Curso)"</h2>
+    <hr />
+    <dl class="details-list">
+        <dt>
+            Nombre del Curso
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre_Curso)
+        </dd>
+
+        <dt>
+            Descripción del Curso
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            Estado de Registro
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado_Registro)
+        </dd>
+
+        <dt>
+            Docente asignado
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Personal.Nombre) @Html.DisplayFor(model => model.Personal.Apellido)
+        </dd>
+
+    </dl>
+    <div class="details-actions">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Curso }, new { @class = "btn btn-primary" }) 
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+    </div>
+</div>

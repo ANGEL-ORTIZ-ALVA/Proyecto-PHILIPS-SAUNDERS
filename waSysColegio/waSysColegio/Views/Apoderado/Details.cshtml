@@ -1,0 +1,117 @@
+﻿@model waSysColegio.Apoderado
+
+@{
+    ViewBag.Title = "Details";
+}
+@Html.Partial("_Head_Content")
+<link rel="stylesheet" href="~/Styles/Formulario.css" />
+<link rel="icon" type="image/png" href="~/Resources/logo-school.png" />
+<link rel="shortcut icon" type="image/x-icon" href="~/Resources/logo-school.png" />
+
+<div class="details-container">
+    <h2 class="details-title">Detalles del Apoderado y Estudiante</h2> <hr />
+    <dl class="details-list">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Apellido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Apellido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DNI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DNI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Correo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Correo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Direccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Direccion)
+        </dd>
+
+        <dt>Estado de Registro</dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado_Registro)
+        </dd>
+
+        <dt>Genero</dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genero.Nombre_Genero)
+        </dd>
+
+        <dt>Usuario</dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.Nombre_Usuario)
+        </dd>
+
+    </dl>
+</div>
+<div class="details-actions">
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Apoderado }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Regresar a la lista", "/Index", null, new { @class = "btn btn-secondary" })
+</div>
+<style>
+    /* Botones de acción */
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 8px 16px;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: #fff;
+        border: none;
+        padding: 8px 16px;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+</style>

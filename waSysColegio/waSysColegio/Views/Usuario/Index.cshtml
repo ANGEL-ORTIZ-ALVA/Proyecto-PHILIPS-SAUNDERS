@@ -1,0 +1,304 @@
+﻿@model IEnumerable<waSysColegio.Usuario>
+
+@{
+    ViewBag.Title = "Index";
+}
+@Html.Partial("_Head_Content")
+@Html.Partial("_Sidebar")
+
+<section class="home">
+    <div class="text">
+        <figure>
+            <img src="../Resources/logo-school.png" width="50" height="50" />
+        </figure>
+        <h2>Colegio 'Philip P. Saunders'</h2>
+    </div>
+
+    <div class="text">
+        <div class="form-container">
+            <div class="header-section">
+                <h4 class="form-title">Lista de usuarios</h4>
+                <div style="margin: 20px 0px;">
+                    <a href="@Url.Action("Create")" class="btn btn-success">
+                        <i class="fas fa-plus"></i> Crear Nuevo Usuario
+                    </a>
+                </div>
+            </div>
+            <!-- Barra de búsqueda -->
+            <div class="search-container">
+                <input type="text"
+                       id="searchBar"
+                       class="input"
+                       placeholder="Busca por nombre de usuario o rol..." />
+            </div>
+            <div class="table-responsive">
+                <div class="table-container">
+                    <table class="table"  id="userTable">
+                        <thead>
+                            <tr>
+                                <th>Nombre de usuario</th>
+                                <th>Password</th>
+                                <th>Fecha de Creación</th>
+                                <th>Último Acceso</th>
+                                <th>Estado de Registro</th>
+                                <th>Estado del usuario</th>
+                                <th>Rol del usuario</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.Nombre_Usuario)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Password)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Fecha_Creacion)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Ultimo_Acceso)</td>
+                                    <td>
+                                        @{
+                                            string badgeClass = "";
+                                            switch (item.Estado_Registro.ToUpper())
+                                            {
+                                                case "REGISTRADO":
+                                                    badgeClass = "active";
+                                                    break;
+                                                case "ELIMINADO":
+                                                    badgeClass = "inactive";
+                                                    break;
+                                                default:
+                                                    badgeClass = "default";
+                                                    break;
+                                            }
+                                        }
+                                        <span class="status-badge @badgeClass">
+                                            @item.Estado_Registro
+                                        </span>
+                                    </td>
+                                    <td>
+                                        @{
+
+                                            switch (item.Estado_Usuario.Nombre_Estado_Usuario.ToUpper())
+                                            {
+                                                case "ACTIVO":
+                                                    badgeClass = "active";
+                                                    break;
+                                                case "INACTIVO":
+                                                    badgeClass = "inactive";
+                                                    break;
+                                                default:
+                                                    badgeClass = "default";
+                                                    break;
+                                            }
+                                        }
+                                        <span class="status-user-badge @badgeClass">
+                                            @Html.DisplayFor(modelItem => item.Estado_Usuario.Nombre_Estado_Usuario)
+                                        </span>
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.Rol.Nombre_Rol)</td>
+                                    <td class="actions-cell">
+                                        <div class="action-buttons">
+                                            @*
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.ID_Usuario })
+                                        @Html.ActionLink("Details", "Details", new { id = item.ID_Usuario })
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.ID_Usuario })
+                                            *@
+                                            <a href="@Url.Action("Edit", new { id = item.ID_Usuario })" class="btn-action btn-edit" title="Editar">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="@Url.Action("Details", new { id = item.ID_Usuario })" class="btn-action btn-details" title="Detalles">
+                                                <i class="fas fa-info-circle"></i>
+                                            </a>
+                                            <a href="@Url.Action("Delete", new { id = item.ID_Usuario })" class="btn-action btn-delete" title="Eliminar">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<style>
+    .header-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+
+    .search-container {
+        margin: 20px 0;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .input {
+        padding: 10px;
+        width: 100%;
+        max-width: 300px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        outline: none;
+        transition: 0.3s;
+        content: '/f002';
+    }
+
+        .input:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+        }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        padding:10px 0px;
+        white-space: nowrap;
+    }
+        .table th {
+            background-color: #fff;
+            font-weight: 600;
+            padding: 1rem;
+            text-align: left;
+        }
+    
+
+        .table td {
+            padding: 1rem;
+           
+        }
+    body.dark .table td {
+        border-bottom: 1px solid #eee;
+    }
+        .table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+    /* Badges de estado */
+    .status-badge {
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+
+        .status-badge.active {
+            background-color: #c5e5c5;
+            color: #229151;
+        }
+
+        .status-badge.inactive {
+            background-color:#edc7c7;
+            color: #cb3a2b;
+        }
+
+    .status-user-badge {
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+        .status-user-badge.active {
+            background-color: #c5e5c5;
+            color: #229151;
+            border: 1px solid #229151;
+        }
+        .status-user-badge.inactive {
+            background-color: #edc7c7;
+            color: #cb3a2b;
+            border: 1px solid #cb3a2b;
+        }
+
+    body.dark .status-badge.active {
+        background-color: #324532;
+        color: #30cf73;
+    }
+    body.dark .status-user-badge.active {
+        background-color: #324532;
+        color: #30cf73;
+        border: 1px solid #27ae60;
+    }
+
+    body.dark .status-badge.inactive {
+        background-color: #4b2727;
+        color: #e74c3c;
+    }
+    body.dark .status-user-badge.inactive {
+        background-color: #4b2727;
+        color: #e74c3c;
+        border: 1px solid #e74c3c;
+    }
+
+    /* Botones de acción */
+    .actions-cell {
+        white-space: nowrap;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 8px;
+    }
+
+    .btn-action {
+        padding: 0.5rem;
+        border-radius: 6px;
+        color: white;
+        text-decoration: none;
+        transition: opacity 0.3s;
+    }
+
+        .btn-action:hover {
+            opacity: 0.8;
+        }
+
+    .btn-edit {
+        background-color: #3498db;
+    }
+
+    .btn-details {
+        background-color: #f39c12;
+    }
+
+    .btn-delete {
+        background-color: #e74c3c;
+    }
+    .btn {
+        text-decoration: none;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const searchBar = document.getElementById("searchBar");
+        const table = document.getElementById("userTable");
+        const rows = table.querySelectorAll("tbody tr");
+
+        searchBar.addEventListener("input", function () {
+            const filter = searchBar.value.toLowerCase();
+
+            rows.forEach((row) => {
+                const username = row.cells[0].textContent.toLowerCase();
+                const role = row.cells[6].textContent.toLowerCase();
+
+                // Mostrar solo las filas que coincidan con el filtro
+                if (username.includes(filter) || role.includes(filter)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        });
+    });
+</script>
+@Html.Partial("_Footer")
+
+
+

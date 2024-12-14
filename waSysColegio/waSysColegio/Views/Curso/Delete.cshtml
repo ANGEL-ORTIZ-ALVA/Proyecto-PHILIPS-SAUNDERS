@@ -1,0 +1,91 @@
+﻿@model waSysColegio.Curso
+
+@{
+    ViewBag.Title = "Delete";
+}
+<link rel="stylesheet" href="~/Styles/Formulario.css" />
+<link rel="icon" type="image/png" href="~/Resources/logo-school.png" />
+<link rel="shortcut icon" type="image/x-icon" href="~/Resources/logo-school.png" />
+
+<div class="delete-container">
+    <h2 class="delete-title">Confirmacion para Eliminar Curso "@Html.DisplayFor(model => model.Nombre_Curso)"</h2>
+    <h3 class="delete-warning">¿Está seguro de que desea eliminar el curso "@Html.DisplayFor(model => model.Nombre_Curso)"?</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nombre del Curso
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre_Curso)
+        </dd>
+
+        <dt>
+            Descripcion
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            Estado del Registro
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado_Registro)
+        </dd>
+
+        <dt>
+            Docente asignado
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Personal.Nombre) @Html.DisplayFor(model => model.Personal.Apellido)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="delete-actions">
+            <input type="submit" value="Eliminar" class="btn btn-danger" />
+            @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-secondary" })
+        </div>
+    }
+</div>
+
+<style>
+    /* Botones de acción */
+    .btn-danger {
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+        padding: 8px 16px;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: #fff;
+        border: none;
+        padding: 8px 16px;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+</style>

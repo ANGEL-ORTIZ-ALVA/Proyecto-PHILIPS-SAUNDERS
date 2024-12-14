@@ -1,0 +1,38 @@
+﻿@model waSysColegio.Grado
+
+@{
+    ViewBag.Title = "Create";
+}
+@Html.Partial("_Head_Content")
+<link rel="stylesheet" href="~/Styles/Formulario.css" />
+<link rel="icon" type="image/png" href="~/Resources/logo-school.png" />
+<link rel="shortcut icon" type="image/x-icon" href="~/Resources/logo-school.png" />
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-container">
+        <h2 class="form-title">Registrar grado</h2>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <label for="Numero_Grado" class="form-label">Nombre de grado</label>
+        @Html.EditorFor(model => model.Numero_Grado, new { htmlAttributes = new { @class = "form-control input" } })
+        @Html.ValidationMessageFor(model => model.Numero_Grado, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group" style="display:none">
+        <label for="Estado_Registro" class="form-label">Estado registro</label>
+        @Html.EditorFor(model => model.Estado_Registro, new { htmlAttributes = new { @class = "form-control input" } })
+        @Html.ValidationMessageFor(model => model.Estado_Registro, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group form-actions">
+        <input type="submit" value="Registrar" class="btn btn-primary" />
+        <a href="@Url.Action("/Index")" class="btn btn-secondary">Regresar</a>
+    </div>
+    </div>
+}
+

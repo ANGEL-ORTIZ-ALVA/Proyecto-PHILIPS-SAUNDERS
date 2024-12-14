@@ -1,0 +1,219 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+:root {
+    --background: #f7f7f7; /* Gris claro */
+    --foreground: #4682b4; /* Azul profesional */
+    --primary: #4682b4; /* Azul profesional */
+    --primary-foreground: #ffffff; /* Blanco */
+    --secondary: #8bc34a; /* Verde claro */
+    --secondary-foreground: #ffffff; /* Blanco */
+    --accent: #5d9acc; /* Amarillo suave */
+    --accent-foreground: #ffffff; /* Blanco */
+    --interaction: #ffa07a; /* Naranja claro */
+    --interaction-foreground: #ffffff; /* Blanco */
+    --creativity: #556b2f; /* Verde oliva */
+    --creativity-foreground: #ffffff; /* Blanco */
+    --muted: #e5e5ea; /* Gris claro */
+    --muted-foreground: #ffffff; /* Blanco */
+    --card: #ffffff; /* Blanco */
+    --card-foreground: #4682b4; /* Azul profesional */
+    --popover: #f7f7f7; /* Gris claro */
+    --popover-foreground: #4682b4; /* Azul profesional */
+    --border: #e5e5ea; /* Gris claro */
+    --input: #ffffff; /* Blanco */
+    --radius: 0.5rem;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: "Space Mono", monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.login-container {
+    display: block;
+    background-color: var(--card);
+    border-radius: var(--radius);
+    padding: 2rem;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+.login-header {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2rem;
+    align-items: center;
+}
+
+    .login-header svg {
+        margin-right: 0.5rem;
+    }
+
+    .login-header h1 {
+        font-size: 1.5rem;
+        margin: 0;
+    }
+
+.login-form-group {
+    margin-bottom: 1.5rem;
+}
+
+.label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.input {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background-color: var(--input);
+    color: var(--foreground);
+    box-sizing: border-box;
+}
+
+    .input:focus {
+        border: 1px solid var(--interaction);
+        box-shadow: 0 0 0 1px var(--interaction);
+        outline: none;
+    }
+
+a {
+    cursor: pointer;
+    font-size: 0.875rem;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+    a:hover {
+        color: var(--interaction) !important;
+        text-decoration: underline;
+    }
+
+.login-footer {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.signup-container {
+    display: block;
+    background-color: var(--primary);
+    border-radius: var(--radius);
+    padding: 2rem;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+}
+
+.signup-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+    color: var(--accent-foreground);
+}
+
+    .signup-header svg {
+        margin-right: 0.5rem;
+        color: var(--accent-foreground);
+    }
+
+    .signup-header h2 {
+        font-size: 1.5rem;
+        margin: 0;
+        color: var(--accent-foreground);
+    }
+
+.signup-form-group {
+    margin-bottom: 1.5rem;
+    color: var(--accent-foreground);
+}
+
+.signup-footer,
+.signup-footer a {
+    text-align: center;
+    color: var(--accent-foreground);
+}
+
+    .signup-footer a :hover {
+        color: var(--interaction) !important;
+        text-decoration: underline;
+    }
+
+.signup-form-group .button {
+    background-color: var(--border);
+    color: var(--primary);
+}
+
+    .signup-form-group .button:hover,
+    .signup-form-group a :hover {
+        background-color: var(--accent-foreground);
+        color: var(--primary);
+    }
+
+.select {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background-color: var(--input);
+    color: var(--foreground);
+    box-sizing: border-box;
+}
+
+    .select:focus {
+        border: 1px solid var(--interaction);
+        box-shadow: 0 0 0 1px var(--interaction);
+        outline: none;
+    }
+
+.button {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: var(--radius);
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .button:hover {
+        background-color: var(--accent);
+        color: var(--accent-foreground);
+    }
+
+@media (min-width: 768px) {
+    .login-container {
+        padding: 3rem;
+    }
+
+    .login-header h1 {
+        font-size: 2rem;
+    }
+
+    .signup-container {
+        padding: 2rem;
+    }
+
+    .signup-header h2 {
+        font-size: 2rem;
+    }
+}

@@ -1,0 +1,89 @@
+﻿@model IEnumerable<waSysColegio.Estado_Usuario>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@Html.Partial("_Head_Content")
+@Html.Partial("_Sidebar")
+
+<section class="home">
+    <div class="text">
+        <figure>
+            <img src="../Resources/logo-school.png" width="50" height="50" />
+        </figure>
+        <h2>Colegio 'Philip P. Saunders'</h2>
+    </div>
+    <div class="text">
+        <div class="form-container">
+            <h4 class="form-title">Lista de estados del usuario</h4>
+
+            <div style="margin: 20px 0px;">
+                @Html.ActionLink("Crear nuevo Estado de usuario", "Create", null, new { @class = "btn btn-success" })
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <tr>
+                        <th>Nombre del Estado de Usuario</th>
+                        <th>Estado de Registro</th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre_Estado_Usuario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Estado_Registro)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ID_Estado_Usuario }, new { @class = "editar", style = "margin-right: 5px;" }) 
+                                @Html.ActionLink("Details", "Details", new { id = item.ID_Estado_Usuario }, new { @class = "info", style = "margin-right: 5px;" }) 
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ID_Estado_Usuario }, new { @class = "borrar" })
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+    <style>
+        .btn {
+            text-decoration: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+
+            .btn-primary:hover {
+                background-color: #3e8e41;
+            }
+
+        .btn-info {
+            background-color: #03A9F4;
+            color: #fff;
+        }
+
+            .btn-info:hover {
+                background-color: #0397d6;
+            }
+
+        .btn-danger {
+            background-color: #F44336;
+            color: #fff;
+        }
+
+            .btn-danger:hover {
+                background-color: #cb362c;
+            }
+    </style>
+    @Html.Partial("_Footer")

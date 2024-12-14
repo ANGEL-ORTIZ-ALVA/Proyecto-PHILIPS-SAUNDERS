@@ -1,0 +1,75 @@
+﻿@model List<waSysColegio.Models.EstudianteViewModel>
+@Html.Partial("_Head_Content")
+@Html.Partial("_Sidebar")
+@if (ViewBag.NoEstudiantes != null)
+{
+    <div class="alert alert-warning">@ViewBag.NoEstudiantes</div>
+}
+
+<section class="home">
+
+    <div class="text">
+        <figure>
+            <img src="../Resources/logo-school.png" width="50" height="50" />
+        </figure>
+        <h2>Colegio 'Philip P. Saunders'</h2>
+    </div>
+    <div class="text">
+        <h3>Registro de Notas - Sección: @ViewBag.Seccion</h3>
+        <p style="font-size:22px; margin:10px 0px;">Lista de los Estudiantes y sus libretas</p>
+
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Grado</th>
+                    <th>Sección</th>
+                    <th>Nombre Completo</th>
+                    <th>DNI</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var estudiante in Model)
+                {
+                    <tr>
+                        <td>@ViewBag.Grado</td>
+                        <td>@ViewBag.Seccion</td>
+                        <td>@estudiante.NombreCompleto</td>
+                        <td>@estudiante.DNI</td>
+                        <td>
+                            <form method="get" action="@Url.Action("ReporteLibreta", "Libreta")">
+                                <input type="hidden" name="estudianteID" value="@estudiante.ID_Estudiante" />
+                                <button type="submit" class="btn btn-primary">Libreta Numeros</button>
+                            </form>
+                            <form method="get" action="@Url.Action("ReporteLibretaLetras", "Libreta")">
+                                <input type="hidden" name="estudianteID" value="@estudiante.ID_Estudiante" />
+                                <button type="submit" class="btn btn-primary">Libreta Letras</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="link-container">
+            <a href="../Libreta/SeleccionarGradoSeccion" class="link">Volver a seleccionar el grado y seccion</a>
+        </div>
+    </div>
+</section>
+<style>
+    .link-container {
+        margin-top: 10px;
+    }
+
+    .link {
+        color: #007bff;
+        font-size: 15px;
+    }
+
+        .link:hover {
+            color: #7c7c7c;
+        }
+</style>
+
+@Html.Partial("_Footer")

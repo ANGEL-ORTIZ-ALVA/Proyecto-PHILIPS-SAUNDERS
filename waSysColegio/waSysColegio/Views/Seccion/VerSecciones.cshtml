@@ -1,0 +1,112 @@
+﻿@model IEnumerable<waSysColegio.Models.Seccion>
+@{
+    ViewBag.Title = "VerSecciones";
+}
+
+@Html.Partial("_Head_Content")
+@Html.Partial("_Sidebar")
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<section class="home">
+    <div class="text">
+        <figure>
+            <img src="../Resources/logo-school.png" width="50" height="50" />
+        </figure>
+        <h2>Colegio 'Philip P. Saunders'</h2>
+    </div>
+    <div class="text">
+            <h2>Secciones:</h2>
+            <p>Elija la sección que desea calificar:</p>
+        <div class="container-card">
+            <ul class="list">
+                @foreach (var seccion in Model)
+                {
+                    <li>
+                        <a class="seccion" href="@Url.Action("VerEstudiantes", "Seccion", new { idSeccion = seccion.ID_Seccion })">
+                            @seccion.Nombre_Seccion
+                        </a>
+                    </li>
+                }
+            </ul>
+
+        </div>
+    </div>
+</section>
+<style>
+    /*.list {
+        display: flex;
+        list-style: none;
+        flex-direction: row;
+        justify-content: center;
+    }
+    .seccion {
+        color: #707070;
+        text-decoration: none;
+        margin-left: 30px;
+        padding: 10px 20px;
+        border-radius: 30px;
+        border: 1px solid #707070;
+    }
+        .seccion:hover {
+            color: #fff;
+            background-color: #5d9acc;
+            cursor: pointer;
+        }*/
+    body.dark .seccion {
+        border: 1px solid #fff;
+        color: #fff;
+    }
+
+    .container-card {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+        gap: 15px; /* Espaciado entre elementos */
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: contents;
+    }
+
+        .list li {
+            display: block;
+        }
+
+    .seccion {
+        display: block;
+        padding: 10px 15px;
+        text-align: center;
+        background-color: #f0f0f0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+    }
+
+        .seccion:hover {
+            background-color: #d9e7ff;
+        }
+</style>
+
+@Html.Partial("_Footer")

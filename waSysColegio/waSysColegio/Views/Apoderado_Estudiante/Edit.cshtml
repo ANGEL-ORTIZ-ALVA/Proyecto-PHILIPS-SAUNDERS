@@ -1,0 +1,39 @@
+﻿@model waSysColegio.Apoderado_Estudiante
+
+@{
+    ViewBag.Title = "Edit";
+}
+<link rel="stylesheet" href="~/Styles/Formulario.css" />
+<link rel="icon" type="image/png" href="~/Resources/logo-school.png" />
+<link rel="shortcut icon" type="image/x-icon" href="~/Resources/logo-school.png" />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-container">
+    <h2 class="form-title">Editar Apoderado Estudiante</h2> <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.ID_Apoderado)
+    @Html.HiddenFor(model => model.ID_Estudiante)
+
+    <div class="form-group">
+        <label class="form-label">Parentesco</label>
+        @Html.EditorFor(model => model.Parentesco, new { htmlAttributes = new { @class = "form-control input" } })
+        @Html.ValidationMessageFor(model => model.Parentesco, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Estado Registro</label>
+        @Html.DropDownListFor(model => model.Estado_Registro, new SelectList(new List<string> { "Registrado", "Eliminado" }), new { @class = "form-control input" })
+        @Html.ValidationMessageFor(model => model.Estado_Registro, "", new { @class = "text-danger" })
+    </div>
+    
+        
+    <div class="form-group form-actions">
+        <input type="submit" value="Guardar" class="btn btn-primary" />
+        <a href="@Url.Action("/Index")" class="btn btn-secondary">Regresar</a>
+    </div>
+</div>
+}

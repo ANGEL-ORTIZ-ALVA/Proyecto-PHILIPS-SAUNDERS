@@ -1,0 +1,51 @@
+﻿@model waSysColegio.Curso
+
+@{
+    ViewBag.Title = "Edit";
+}
+@Html.Partial("_Head_Content")
+<link rel="stylesheet" href="~/Styles/Formulario.css" />
+<link rel="icon" type="image/png" href="~/Resources/logo-school.png" />
+<link rel="shortcut icon" type="image/x-icon" href="~/Resources/logo-school.png" />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-container">
+        <h2 class="form-title">Editar Curso</h2>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID_Curso)
+
+        <div class="form-group">
+            <label for="Nombre_Curso" class="form-label">Nombre del Curso</label>
+            @Html.EditorFor(model => model.Nombre_Curso, new { htmlAttributes = new { @class = "form-control input" } })
+            @Html.ValidationMessageFor(model => model.Nombre_Curso, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label for="Descripcion" class="form-label">Descripción del Curso</label>
+            @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control input" } })
+            @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Estado Registro</label>
+            @Html.DropDownListFor(model => model.Estado_Registro, new SelectList(new List<string> { "Registrado", "Eliminado" }), new { @class = "form-control input" })
+            @Html.ValidationMessageFor(model => model.Estado_Registro, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label for="ID_Personal" class="form-label">Docente asignado</label>
+            @Html.DropDownList("ID_Personal", null, htmlAttributes: new { @class = "form-control input" })
+            @Html.ValidationMessageFor(model => model.ID_Personal, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group form-actions">
+            <input type="submit" value="Guardar" class="btn btn-primary" />
+            <a href="@Url.Action("Index")" class="btn btn-secondary">Regresar</a>
+        </div>
+    </div>
+}
+

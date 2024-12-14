@@ -1,0 +1,156 @@
+﻿@model IEnumerable<waSysColegio.Models.DetalleCurso>
+
+@{
+    ViewBag.Title = "VerEstudiantes";
+}
+@Html.Partial("_Head_Content")
+
+@Html.Partial("_Sidebar")
+
+<section class="home">
+    <div class="text">
+        <figure>
+            <img src="../Resources/logo-school.png" width="50" height="50" />
+        </figure>
+        <h2>Colegio 'Philip P. Saunders'</h2>
+        <h3>Registro de Notas - Sección: @ViewBag.SeccionId</h3>
+    </div>
+    <div class="text">
+        <div class="form-container">
+
+            <form method="post" action="@Url.Action("GuardarNotas", "Seccion")" onsubmit="return validarNotas()">
+
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="alert alert-success" role="alert" style="color:forestgreen; font-size:22px;">
+                        @TempData["SuccessMessage"]
+                    </div>
+                }
+                <div style="margin-bottom:15px;">
+                    <label style="font-size:22px;">Periodo:</label>
+                    <select id="ID_Periodo" name="ID_Periodo" class="input" required>
+                        <option value="">Seleccione un periodo</option>
+                        @foreach (var periodo in ViewBag.Periodos)
+                        {
+                            <option value="@periodo.ID_Periodo" @(periodo.ID_Periodo == ViewBag.SelectedPeriodoId ? "selected" : "")>@periodo.Nombre_Periodo</option>
+                        }
+                    </select>
+
+                    <label style="font-size:22px;">Curso:</label>
+                    <select id="ID_Curso" name="ID_Curso" class="input" required>
+                        <option value="">Seleccione un curso</option>
+                        @foreach (var curso in ViewBag.Cursos)
+                        {
+                            <option value="@curso.ID_Curso" @(curso.ID_Curso == ViewBag.SelectedCursoId ? "selected" : "")>@curso.Nombre_Curso</option>
+                        }
+                    </select>
+
+                    <button type="button" class="btn-primary" onclick="cargarNotas()">Cargar Notas</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Estudiante</th>
+                                <th>Competencia 1</th>
+                                <th>Competencia 2</th>
+                                <th>Competencia 3</th>
+                                <th>Competencia 4</th>
+                                <th>Proyecto</th>
+                                <th>Examen Final</th>
+                            </tr>
+                        </thead>
+                        <tbody id="estudiantes-notas">
+                            @{
+                                int index = 0;
+                            }
+                            @foreach (var estudiante in Model)
+                            {
+                                <tr>
+                                    <td>@estudiante.NombreEstudiante @estudiante.ApellidoEstudiante</td>
+                                    <input type="hidden" name="detalles[@index].ID_Estudiante" value="@estudiante.ID_Estudiante" />
+                                    <input type="hidden" name="detalles[@index].ID_Curso" value="@ViewBag.SelectedCursoId" />
+                                    <input type="hidden" name="detalles[@index].ID_Periodo" value="@ViewBag.SelectedPeriodoId" />
+
+                                    <td><input name="detalles[@index].Competencia1" type="number" step="0.01" min="0" max="20" required value="@estudiante.Competencia1" /></td>
+                                    <td><input name="detalles[@index].Competencia2" type="number" step="0.01" min="0" max="20" required value="@estudiante.Competencia2" /></td>
+                                    <td><input name="detalles[@index].Competencia3" type="number" step="0.01" min="0" max="20" required value="@estudiante.Competencia3" /></td>
+                                    <td><input name="detalles[@index].Competencia4" type="number" step="0.01" min="0" max="20" required value="@estudiante.Competencia4" /></td>
+                                    <td><input name="detalles[@index].Proyecto" type="number" step="0.01" min="0" max="20" required value="@estudiante.Proyecto" /></td>
+                                    <td><input name="detalles[@index].ExamenFinal" type="number" step="0.01" min="0" max="20" required value="@estudiante.ExamenFinal" /></td>
+                                </tr>
+                                {
+                                    index++;
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <button type="submit" class="btn-success">Guardar Notas</button>
+            </form>
+            <div>
+                <p>
+                    @Html.ActionLink("Volver a lista de Secciones", "VerSecciones", "Seccion", null, new { @class = "link" })
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Formulario -->
+
+
+
+
+<script>
+    function cargarNotas() {
+        var periodoId = document.getElementById("ID_Periodo").value;
+        var cursoId = document.getElementById("ID_Curso").value;
+
+        if (!periodoId || !cursoId) {
+            alert("Por favor, seleccione un curso y un periodo.");
+            return;
+        }
+
+        // Redirige a la acción de CargarNotas en el controlador con los parámetros seleccionados
+        window.location.href = '@Url.Action("CargarNotas", "Seccion")' + '?idSeccion=@ViewBag.SeccionId&idPeriodo=' + periodoId + '&idCurso=' + cursoId;
+    }
+
+    function validarNotas() {
+        const inputs = document.querySelectorAll("input[type='number']");
+        for (const input of inputs) {
+            const value = parseFloat(input.value);
+            if (isNaN(value) || value < 0 || value > 20) {
+                alert("Por favor, ingrese notas entre 0 y 20 en todos los campos.");
+                input.focus();
+                return false; // Cancela el envío del formulario
+            }
+        }
+        return true; // Permite el envío del formulario
+    }
+</script>
+<style>
+    .link {
+        color: #007bff;
+        font-size:15px;
+    }
+        .link:hover {
+            color:#7c7c7c;
+        }
+    input[type="number"] {
+        background: transparent;
+        border: 1px solid #7c7c7c;
+        border-radius:5px;
+        padding:5px 10px;
+        cursor: pointer;
+    }
+        input:focus {
+            outline:none;
+            border: 1px solid #007bff !important;
+        }
+    body.dark input {
+        color:#fff;
+    }
+</style>
+@Html.Partial("_Footer")
+
+

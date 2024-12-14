@@ -1,0 +1,97 @@
+﻿@model IEnumerable<waSysColegio.Models.Estudiante>
+@{
+    ViewBag.Title = "VerEstudiante";
+}
+
+@Html.Partial("_Head_Content")
+@Html.Partial("_Sidebar")
+<style>
+    .ver {
+        padding: 10px 20px;
+        background-color: deepskyblue;
+        margin-left: 5px;
+        border-radius: 10px;
+    }
+    .ver:hover {
+        transition:0.02s;
+        background-color: skyblue;
+        color:#1e1e1e;
+    }
+    .url:hover {
+              color:dodgerblue;
+    }
+
+    .btn-group {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+    }
+
+        .btn-group a {
+            text-decoration: none;
+            font-size: 14px;
+            color:white;
+        }
+
+    .btn-success {
+
+        padding: 8.5px !important;
+    }
+</style>
+<section class="home">
+    <div class="text">
+        <figure>
+            <img src="../Resources/logo-school.png" width="50" height="50" />
+        </figure>
+        <h2>Colegio 'Philip P. Saunders'</h2>
+    </div>
+    <div class="text">
+        <div class="form-container">
+            <h3 class="form-title">Gestion de notas del Estudiante</h3>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Fecha de Nacimiento</th>
+                            <th>DNI</th>
+                            <th>Dirección</th>
+                            <th>ID Género</th>
+                            <th>ID Grado</th>
+                            <th>ID Sección</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var estudiante in Model)
+                        {
+                            <tr>
+                                <td>@estudiante.ID_Estudiante</td>
+                                <td>@estudiante.Nombre</td>
+                                <td>@estudiante.Apellido</td>
+                                <td>@estudiante.Fecha_Nacimiento.ToShortDateString()</td>
+                                <td>@estudiante.DNI</td>
+                                <td>@estudiante.Direccion</td>
+                                <td>@estudiante.ID_Genero</td>
+                                <td>@estudiante.ID_Grado</td>
+                                <td>@estudiante.ID_Seccion</td>
+                                <td>
+                                    <!-- Botón para registrar nota -->
+                                    <div class="btn-group">
+                                        <a href="@Url.Action("RegistrarNota", "DetalleCurso", new { idEstudiante = estudiante.ID_Estudiante })" class="btn btn-success" style="font-size:14px; padding:0px;">
+                                            Registrar Nota
+                                        </a>
+                                        <a href="@Url.Action("VerNotas", "DetalleCurso", new { idEstudiante = estudiante.ID_Estudiante })" class="btn ver">Ver Notas</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+@Html.Partial("_Footer")

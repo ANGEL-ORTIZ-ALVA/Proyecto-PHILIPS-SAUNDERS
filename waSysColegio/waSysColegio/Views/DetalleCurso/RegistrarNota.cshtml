@@ -1,0 +1,90 @@
+﻿@model waSysColegio.Models.DetalleCurso
+
+@{
+    ViewBag.Title = "RegistrarNota";
+}
+
+@section Styles {
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/bootstrap.min.js"></script>
+}
+<link href="~/Css/EstilosPrincipal.css" rel="stylesheet" type="text/css" />
+<body>
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    <h2>Registrar Nota para Estudiante @Model.ID_Estudiante</h2>
+
+    <div class="form-group">
+        <label>Estudiante ID:</label>
+        <input type="text" name="idEstudiante" class="form-control" value="@Model.ID_Estudiante" readonly />
+    </div>
+
+    <div class="form-group">
+        <label>Nombre del Estudiante:</label>
+        <input type="text" class="form-control" value="@Model.NombreEstudiante" readonly />
+    </div>
+
+    @using (Html.BeginForm("RegistrarNota", "DetalleCurso", FormMethod.Post))
+    {
+        <div class="form-group">
+            <label>Estudiante ID:</label>
+            @Html.DisplayFor(model => model.ID_Estudiante)
+            @Html.HiddenFor(model => model.ID_Estudiante)
+        </div>
+
+        <div class="form-group">
+            <label for="ID_Curso">Curso:</label>
+            @Html.DropDownList("ID_Curso", new SelectList(ViewBag.Cursos, "ID_Curso", "Nombre_Curso"), "Selecciona un curso", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ID_Curso, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label for="ID_Evaluacion">Evaluación:</label>
+            @Html.DropDownList("ID_Evaluacion", new SelectList(ViewBag.Evaluaciones, "ID_Evaluacion", "Nombre_Evaluacion"), "Selecciona una evaluación", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ID_Evaluacion, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label for="ID_Asistencia">Asistencia:</label>
+            @Html.DropDownList("ID_Asistencia", new SelectList(ViewBag.Asistencias, "ID_Asistencia", "Nombre_Tipo_Asistencia"), "Selecciona el tipo de asistencia", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ID_Asistencia, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label for="ID_Periodo">Periodo:</label>
+            @Html.DropDownList("ID_Periodo", new SelectList(ViewBag.Periodos, "ID_Periodo", "Nombre_Periodo"), "Selecciona un periodo", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ID_Periodo, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label for="Nota">Nota:</label>
+            @Html.TextBoxFor(model => model.Nota, new { @class = "form-control", type = "number", step = "0.01", min = "0", max = "20" })
+            @Html.ValidationMessageFor(model => model.Nota, "", new { @class = "text-danger" })
+        </div>
+
+        <button type="submit" class="btn btn-primary">Registrar Nota</button>
+    }
+    <div>
+        <p>
+            @Html.ActionLink("Volver a lista de Estudiantes", "VerEstudiante", "Estudiante", null, new { @class = "btn btn-success" })
+        </p>
+    </div>
+</body>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+

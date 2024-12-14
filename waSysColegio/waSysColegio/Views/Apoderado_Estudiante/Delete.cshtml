@@ -1,0 +1,70 @@
+﻿@model waSysColegio.Apoderado_Estudiante
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+@Html.Partial("_Head_Content")
+<link rel="stylesheet" href="../Styles/Formulario.css" />
+<link rel="icon" type="image/png" href="~/Resources/logo-school.png" />
+<link rel="shortcut icon" type="image/x-icon" href="~/Resources/logo-school.png" />
+
+<div class="delete-container">
+    <h2 class="delete-title">Confirmar eliminación</h2>
+    <h3 class="delete-warning">¿Está seguro de que desea eliminar este registro?</h3>   <hr />
+    <dl class="delete-details">
+        <dt>Parentesco</dt>
+        <dd>@Html.DisplayFor(model => model.Parentesco)</dd>
+
+        <dt>Estado Registro</dt>
+        <dd>@Html.DisplayFor(model => model.Estado_Registro)</dd>
+
+        <dt>Nombre del apoderado:</dt>
+        <dd>@Html.DisplayFor(model => model.Apoderado.Nombre) @Html.DisplayFor(model => model.Estudiante.Nombre)</dd>
+
+        <dt>Nombre del estudiante: </dt>
+        <dd>@Html.DisplayFor(model => model.Estudiante.Nombre) @Html.DisplayFor(model => model.Estudiante.Nombre)</dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="delete-actions">
+            <input type="submit" value="Eliminar" class="btn btn-danger" />
+            @Html.ActionLink("Cancelar", "/Index", null, new { @class = "btn btn-secondary" })
+        </div>
+    }
+</div>
+
+<style>
+    /* Botones de acción */
+    .btn-danger {
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+        padding: 8px 16px;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: #fff;
+        border: none;
+        padding: 8px 16px;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+</style>
