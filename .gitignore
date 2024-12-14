@@ -1,0 +1,16 @@
+# Archivos de Visual Studio
+.vs/
+# Archivos de configuración de Visual Studio
+.vscode/
+# Archivos binarios y temporales generados por el build
+bin/
+obj/
+# Archivos de usuario específicos de Visual Studio
+*.user
+*.userosscache
+*.suo
+*.userprefs
+# Archivos de la base de datos local de Visual Studio
+appdata/
+# Archivos de configuración de IIS Express
+applicationhost.config
